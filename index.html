@@ -294,7 +294,8 @@
   .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-5); }
   .team-card { background: var(--white); padding: var(--s-5); border: 1px solid var(--slate-100); border-radius: var(--r-2); transition: transform .2s, box-shadow .2s; }
   .team-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .team-card .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--gsc-navy) center/cover no-repeat; color: var(--gsc-gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 700; font-size: 32px; margin-bottom: var(--s-4); border: 2px solid var(--gsc-gold); }
+  .team-card .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--gsc-navy) center/cover no-repeat; color: var(--gsc-gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 700; font-size: 32px; margin-bottom: var(--s-4); border: 2px solid var(--gsc-gold); overflow: hidden; }
+  .team-card .avatar[style*='url'] { color: transparent; }
   .team-card h4 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 16px; margin: 0 0 4px; }
   .team-card .title { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--gsc-gold-deep); margin-bottom: var(--s-3); font-weight: 700; }
   .team-card p { font-size: 13px; color: var(--slate-700); line-height: 1.55; margin: 0; }
@@ -919,19 +920,21 @@
         <p>9 years in direct CRE investing at Bridge Industrial, DWS/RREEF Management, and Morgan Stanley. Acquired, managed, and disposed of <strong>$3.9B+</strong> of real estate. Career began at JMP Securities. UC Berkeley, Statistics.</p>
       </div>
       <div class="team-card">
-        <div class="avatar">GH</div>
+        <div class="avatar" style="background-image: url('assets/images/team/greg-houge.jpg');">GH</div>
         <h4>Greg Houge</h4>
         <div class="title">Co-Founder · Storage Etc.</div>
+        <a href="https://www.linkedin.com/in/greg-houge-054026b" target="_blank" rel="noopener" style="font-size:11px; color: var(--gsc-navy-70); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--s-3);">LinkedIn ↗</a>
         <p>30+ years self-storage. Co-founded Storage Etc., LLC in 1999 and served as President through late 2023, after selling a <strong>$335M portfolio</strong> to a CBRE Investment Management-overseen private REIT. UCLA, Economics.</p>
       </div>
       <div class="team-card">
-        <div class="avatar">DJ</div>
+        <div class="avatar" style="background-image: url('assets/images/team/doug-jensen.jpg');">DJ</div>
         <h4>Doug Jensen</h4>
         <div class="title">Principal · Storage Etc.</div>
+        <a href="https://www.linkedin.com/in/doug-jensen-61052417" target="_blank" rel="noopener" style="font-size:11px; color: var(--gsc-navy-70); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--s-3);">LinkedIn ↗</a>
         <p>President of Dano Companies, Partner of Douglas Allred Company, Principal of Storage Etc. <strong>40+ years CRE</strong> experience. Partnered with Greg since 1999. USC, Economics &amp; International Relations.</p>
       </div>
       <div class="team-card">
-        <div class="avatar">DT</div>
+        <div class="avatar" style="background-image: url('assets/images/team/david-thomas.jpg');">DT</div>
         <h4>David Thomas</h4>
         <div class="title">Advisor · LBA Realty</div>
         <p>40+ years in investment sales, tenant negotiations, development, and asset management. Joined LBA Realty in 1993 as one of four original partners. UC Berkeley, Resource Economics.</p>
