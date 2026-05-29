@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 150" width="540" height="150" role="img" aria-label="Greenwich Street Capital">
+  <title>Greenwich Street Capital</title>
+  <text x="20" y="115" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="105" fill="#003262" letter-spacing="-2">GSC</text>
+  <rect x="320" y="32" width="2" height="90" fill="#FDB515"/>
+  <g font-family="'Helvetica Neue', Arial, sans-serif" font-weight="400" font-size="28" fill="#003262">
+    <text x="340" y="58">Greenwich</text>
+    <text x="340" y="92">Street</text>
+    <text x="340" y="126">Capital</text>
+  </g>
+</svg>

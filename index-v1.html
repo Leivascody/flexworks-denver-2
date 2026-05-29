@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FlexWorks Denver II — 1800 East 69th Avenue, Denver, CO. A 52-unit flex storage value-add investment opportunity from Greenwich Street Capital.">
+<meta property="og:title" content="FlexWorks Denver II · Investment Opportunity">
+<meta property="og:description" content="A 52-unit flex storage value-add in North Central Denver. $6.0M · $131 PSF · 16.6% projected Investor IRR.">
+<meta property="og:type" content="website">
+
+<title>FlexWorks Denver II · Investment Opportunity · Greenwich Street Capital</title>
+
+<link rel="icon" type="image/svg+xml" href="assets/brand/GSC_Favicon.svg">
+<link rel="apple-touch-icon" href="assets/brand/GSC_Favicon_180.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&family=Source+Serif+4:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+<!-- Mapbox (lazy-loaded only if token is set) -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.css" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     v2 — Cinematic Deal Site
+     ============================================================ */
+
+  /* ---- Config: edit CONFIG block at bottom of <script> ---- */
+
+  /* ---- Access gate ---- */
+  .gate { position: fixed; inset: 0; z-index: 1000; background: rgba(0,50,98,.96); display: none; align-items: center; justify-content: center; padding: var(--s-5); backdrop-filter: blur(8px); }
+  .gate.active { display: flex; }
+  .gate .panel { background: var(--white); border-radius: var(--r-2); max-width: 540px; width: 100%; padding: var(--s-7); position: relative; box-shadow: var(--shadow-lg); }
+  .gate .panel::before { content:""; position:absolute; top:0; left:0; right:0; height:4px; background: var(--gsc-gold); }
+  .gate h2 { font-family: var(--font-display); font-weight: 900; color: var(--gsc-navy); font-size: 28px; margin: 0 0 var(--s-3); }
+  .gate p { color: var(--slate-700); font-size: 14px; line-height: 1.6; margin: 0 0 var(--s-4); }
+  .gate label.cb { display: flex; gap: var(--s-3); align-items: start; font-size: 13px; color: var(--slate-700); cursor: pointer; padding: var(--s-2) 0; }
+  .gate label.cb input { margin-top: 3px; }
+  .gate .actions { display: flex; gap: var(--s-3); margin-top: var(--s-5); }
+
+  /* ---- Scroll progress rail (right side) ---- */
+  .progress-rail { position: fixed; top: 80px; right: 24px; bottom: 80px; width: 2px; background: rgba(0,50,98,.08); z-index: 50; border-radius: 1px; }
+  .progress-rail .fill { position: absolute; top: 0; left: 0; right: 0; background: var(--gsc-gold); height: 0%; border-radius: 1px; transition: height .1s linear; }
+  .progress-rail .dot { position: absolute; left: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; border-radius: 50%; background: var(--white); border: 2px solid var(--gsc-navy-20); cursor: pointer; transition: all .15s; }
+  .progress-rail .dot.active { background: var(--gsc-gold); border-color: var(--gsc-gold); transform: translate(-50%, -50%) scale(1.4); box-shadow: 0 0 0 4px rgba(253,181,21,.18); }
+  .progress-rail .dot:hover .label { opacity: 1; transform: translateX(-100%) translateX(-12px); }
+  .progress-rail .dot .label { position: absolute; right: 16px; top: 50%; transform: translateY(-50%) translateX(0); background: var(--gsc-navy); color: var(--white); padding: 4px 10px; border-radius: var(--r-1); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; opacity: 0; pointer-events: none; transition: all .15s; }
+  @media (max-width: 900px) { .progress-rail { display: none; } }
+
+  /* ---- Nav ---- */
+  .nav-bar { backdrop-filter: blur(8px); background: rgba(255,255,255,.96); }
+  .nav-bar .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-bar .brand .mono { font-family: var(--font-serif); font-weight: 700; color: var(--gsc-navy); font-size: 26px; line-height: 1; }
+  .nav-bar .brand .bar { display: block; width: 1px; height: 26px; background: var(--gsc-gold); }
+  .nav-bar .brand .word { font-family: var(--font-display); font-weight: 400; color: var(--gsc-navy); font-size: 9.5px; text-transform: uppercase; letter-spacing: .12em; line-height: 1.3; }
+  @media (max-width: 900px) { .nav-bar .nav-links { display: none; } }
+
+  /* ---- Watermark ---- */
+  .watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-30deg); font-family: var(--font-display); font-size: 96px; font-weight: 900; color: rgba(0,50,98,.04); pointer-events: none; z-index: 0; user-select: none; white-space: nowrap; display: none; }
+  .watermark.active { display: block; }
+
+  /* ---- Hero (cinematic) ---- */
+  .hero { position: relative; min-height: 760px; padding: var(--s-10) var(--s-7) var(--s-9); overflow: hidden; background: var(--gsc-navy); }
+  .hero .bg { position: absolute; inset: 0; background-image: url('assets/images/property/aerial-with-lease-sign.jpg'); background-size: cover; background-position: center; transform: scale(1.05); transition: transform 6s ease-out; }
+  .hero.loaded .bg { transform: scale(1); }
+  .hero::before { content:""; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(0,50,98,.93) 0%, rgba(0,50,98,.70) 55%, rgba(0,50,98,.40) 100%); z-index: 1; }
+  .hero::after { content:""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gsc-gold); z-index: 3; }
+  .hero > * { position: relative; z-index: 2; color: var(--white); }
+  .hero .eyebrow { color: var(--gsc-gold); opacity: 0; animation: fadeUp .8s .3s forwards; }
+  .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(36px,5vw,60px); line-height: 1.05; margin: var(--s-4) 0 var(--s-3); max-width: 900px; opacity: 0; animation: fadeUp .8s .5s forwards; }
+  .hero .sub { color: var(--gsc-navy-20); font-size: 18px; line-height: 1.55; max-width: 720px; opacity: 0; animation: fadeUp .8s .7s forwards; }
+  .hero .sub strong { color: var(--white); }
+  .hero .hero-actions { margin-top: var(--s-5); display: flex; gap: var(--s-3); flex-wrap: wrap; opacity: 0; animation: fadeUp .8s .9s forwards; }
+  .hero .hero-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-5); margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid rgba(255,255,255,.18); max-width: 920px; opacity: 0; animation: fadeUp .8s 1.1s forwards; }
+  .hero .hero-kpis .k .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--gsc-navy-20); }
+  .hero .hero-kpis .k .value { font-family: var(--font-display); font-weight: 900; font-size: 38px; line-height: 1; color: var(--white); margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .hero .hero-kpis .k .sub-l { font-size: 11px; color: var(--gsc-navy-20); margin-top: 4px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 760px) { .hero { padding: var(--s-8) var(--s-5); min-height: 600px; } .hero .hero-kpis { grid-template-columns: repeat(2,1fr); } }
+
+  /* Parcel polygon SVG overlay - drawn on scroll */
+  .hero .parcel { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+  .hero .parcel svg { width: 100%; height: 100%; }
+  .hero .parcel polygon { fill: none; stroke: var(--gsc-gold); stroke-width: 3; stroke-linejoin: round; stroke-dasharray: 2500; stroke-dashoffset: 2500; transition: stroke-dashoffset 1.2s ease-out; }
+  .hero.parcel-drawn .parcel polygon { stroke-dashoffset: 0; }
+
+  /* Scroll cue */
+  .scroll-cue { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: var(--gsc-gold); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .8; animation: bob 2s ease-in-out infinite; z-index: 3; }
+  @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* ---- Section / reveal ---- */
+  .section h2.h { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: clamp(28px,3.5vw,40px); line-height: 1.1; margin: 0 0 var(--s-3); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .anchor-offset { scroll-margin-top: 80px; }
+
+  /* ---- Latest update band ---- */
+  .update-band { background: var(--gsc-gold-soft); border-left: 4px solid var(--gsc-gold-deep); padding: var(--s-5) var(--s-6); border-radius: 0 var(--r-2) var(--r-2) 0; display: grid; grid-template-columns: auto 1fr; gap: var(--s-5); align-items: center; }
+  .update-band .meta { font-family: var(--font-display); font-weight: 800; color: var(--gsc-gold-deep); font-size: 12px; text-transform: uppercase; letter-spacing: .15em; line-height: 1.4; }
+  .update-band h3 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 19px; margin: 0 0 6px; }
+  .update-band p { font-size: 14px; color: var(--ink); line-height: 1.6; margin: 0; }
+
+  /* ---- Highlights ---- */
+  .highlight { background: var(--white); border: 1px solid var(--slate-100); border-left: 3px solid var(--gsc-gold); border-radius: 0 var(--r-2) var(--r-2) 0; padding: var(--s-5); transition: transform .2s; }
+  .highlight:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .highlight .stat-big { font-family: var(--font-display); font-weight: 900; color: var(--gsc-navy); font-size: 36px; line-height: 1; margin-bottom: var(--s-2); font-variant-numeric: tabular-nums; }
+  .highlight .label { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 14px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: var(--s-2); }
+  .highlight p { font-size: 13.5px; color: var(--slate-700); line-height: 1.55; margin: 0; }
+
+  /* ---- Photo gallery with lightbox ---- */
+  .gallery { display: grid; gap: var(--s-3); grid-template-columns: repeat(12,1fr); grid-auto-rows: 180px; }
+  .gallery .tile { overflow: hidden; border-radius: var(--r-2); background: var(--slate-100) center/cover no-repeat; position: relative; cursor: pointer; transition: transform .2s; }
+  .gallery .tile:hover { transform: scale(1.01); }
+  .gallery .tile .caption { position: absolute; inset: auto 0 0 0; background: linear-gradient(to top, rgba(0,50,98,.92), transparent); color: var(--white); padding: var(--s-4); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; opacity: 0; transition: opacity .15s; }
+  .gallery .tile:hover .caption { opacity: 1; }
+  .gallery .tile.t-1 { grid-column: span 7; grid-row: span 2; }
+  .gallery .tile.t-2 { grid-column: span 5; }
+  .gallery .tile.t-3 { grid-column: span 5; }
+  .gallery .tile.t-4 { grid-column: span 4; }
+  .gallery .tile.t-5 { grid-column: span 4; }
+  .gallery .tile.t-6 { grid-column: span 4; }
+  @media (max-width: 900px) { .gallery { grid-template-columns: repeat(2,1fr); } .gallery .tile { grid-column: span 1 !important; grid-row: span 1 !important; } .gallery .tile.t-1 { grid-column: span 2 !important; } }
+
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 92vw; max-height: 88vh; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .lightbox .lb-close { position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--gsc-gold); font-size: 28px; cursor: pointer; }
+  .lightbox .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,50,98,.6); color: var(--white); border: none; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; }
+  .lightbox .lb-prev { left: 24px; }
+  .lightbox .lb-next { right: 24px; }
+  .lightbox .lb-caption { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); color: var(--white); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; background: rgba(0,0,0,.4); padding: 8px 16px; border-radius: var(--r-1); }
+
+  /* ---- Specs ---- */
+  .specs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+  .specs table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .specs th { text-align: left; font-family: var(--font-display); font-size: 12px; color: var(--gsc-navy); text-transform: uppercase; letter-spacing: .1em; padding: var(--s-3) 0 var(--s-2); border-bottom: 2px solid var(--gsc-gold); }
+  .specs td { padding: 8px 0; border-bottom: 1px solid var(--slate-100); }
+  .specs td:first-child { color: var(--slate-500); font-size: 13px; }
+  .specs td:last-child { text-align: right; font-weight: 700; color: var(--gsc-navy); font-variant-numeric: tabular-nums; }
+  @media (max-width: 760px) { .specs { grid-template-columns: 1fr; } }
+
+  /* ---- Map ---- */
+  #map { width: 100%; height: 480px; border-radius: var(--r-2); background-color: var(--slate-100); }
+  #map.fallback { background-image: url('assets/images/maps/denver-radii-1-5-mile.jpg'); background-size: cover; background-position: center; }
+  .map-toggle { display: flex; gap: 4px; padding: 4px; background: var(--slate-100); border-radius: var(--r-1); margin-bottom: var(--s-3); width: fit-content; }
+  .map-toggle button { background: transparent; color: var(--slate-700); border: none; padding: 8px 14px; font-family: var(--font-display); font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 2px; text-transform: uppercase; letter-spacing: .08em; }
+  .map-toggle button.active { background: var(--gsc-navy); color: var(--white); }
+
+  /* ---- Comp table ---- */
+  .comps-wrap { overflow-x: auto; }
+  .comps { width: 100%; border-collapse: collapse; font-size: 13.5px; border: 1px solid var(--slate-100); border-radius: var(--r-2); overflow: hidden; min-width: 800px; }
+  .comps thead th { background: var(--gsc-navy); color: var(--white); padding: var(--s-3) var(--s-4); text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+  .comps thead th.num { text-align: right; }
+  .comps tbody td { padding: 10px var(--s-4); border-bottom: 1px solid var(--slate-100); }
+  .comps tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--gsc-navy); }
+  .comps tbody tr.subject { background: var(--gsc-gold-soft); }
+  .comps tbody tr.subject td { font-weight: 700; color: var(--gsc-navy); }
+  .comps tbody tr.subject td:first-child::before { content:"★ "; color: var(--gsc-gold-deep); }
+
+  /* ---- Business plan timeline ---- */
+  .timeline { display: grid; grid-template-columns: repeat(5,1fr); gap: var(--s-3); position: relative; }
+  .timeline::before { content:""; position: absolute; top: 22px; left: 10%; right: 10%; height: 2px; background: var(--gsc-gold); z-index: 0; }
+  .timeline .step { background: var(--white); padding: 0 var(--s-2); position: relative; z-index: 1; text-align: center; }
+  .timeline .step .num { width: 44px; height: 44px; border-radius: 50%; background: var(--gsc-navy); color: var(--gsc-gold); margin: 0 auto var(--s-3); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 900; font-size: 16px; }
+  .timeline .step h4 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 14px; margin: 0 0 6px; }
+  .timeline .step p { font-size: 12.5px; color: var(--slate-700); margin: 0; line-height: 1.45; }
+  @media (max-width: 760px) { .timeline { grid-template-columns: 1fr 1fr; } .timeline::before { display: none; } }
+
+  /* ---- Sensitivity explorer ---- */
+  .sens-explorer { background: var(--gsc-navy); color: var(--white); padding: var(--s-7); border-radius: var(--r-2); position: relative; overflow: hidden; }
+  .sens-explorer::before { content:""; position: absolute; top:0; left:0; right:0; height:4px; background: var(--gsc-gold); }
+  .sens-explorer .header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap; margin-bottom: var(--s-5); }
+  .sens-explorer h3 { font-family: var(--font-display); font-weight: 800; font-size: 22px; margin: 0; color: var(--white); }
+  .sens-explorer .sub { font-size: 13px; color: var(--gsc-navy-20); margin: 4px 0 0; }
+  .sens-explorer .controls { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); margin: var(--s-5) 0; }
+  .sens-explorer .ctrl { padding: var(--s-4); background: rgba(0,0,0,.18); border-radius: var(--r-2); border: 1px solid rgba(255,255,255,.06); }
+  .sens-explorer .ctrl .label { display: flex; justify-content: space-between; font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--gsc-navy-20); margin-bottom: var(--s-3); }
+  .sens-explorer .ctrl .label .val { color: var(--gsc-gold); font-weight: 800; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .sens-explorer input[type="range"] { width: 100%; -webkit-appearance: none; appearance: none; height: 4px; background: rgba(255,255,255,.15); border-radius: 2px; outline: none; }
+  .sens-explorer input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--gsc-gold); cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+  .sens-explorer input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--gsc-gold); cursor: pointer; border: none; }
+  .sens-explorer .results { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s-3); }
+  .sens-explorer .r { padding: var(--s-4); border-left: 2px solid var(--gsc-gold); }
+  .sens-explorer .r .l { font-size: 10.5px; text-transform: uppercase; letter-spacing: .15em; color: var(--gsc-navy-20); }
+  .sens-explorer .r .v { font-family: var(--font-display); font-weight: 900; font-size: 36px; color: var(--white); margin-top: 4px; font-variant-numeric: tabular-nums; transition: color .3s; }
+  .sens-explorer .r .v.up { color: #6EE7B7; }
+  .sens-explorer .r .v.down { color: #FCA5A5; }
+  .sens-explorer .r .vs { font-size: 11px; color: var(--gsc-navy-20); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .sens-explorer .heatmap { margin-top: var(--s-5); }
+  .sens-explorer .heatmap table { width: 100%; border-collapse: separate; border-spacing: 2px; font-size: 12px; color: var(--white); }
+  .sens-explorer .heatmap th { padding: 6px 4px; font-family: var(--font-display); font-weight: 700; font-size: 11px; color: var(--gsc-navy-20); text-transform: uppercase; letter-spacing: .08em; }
+  .sens-explorer .heatmap td { padding: 8px 4px; text-align: center; border-radius: 3px; font-variant-numeric: tabular-nums; transition: outline .15s; }
+  .sens-explorer .heatmap td.cell { cursor: pointer; }
+  .sens-explorer .heatmap td.cell:hover { outline: 2px solid var(--white); }
+  .sens-explorer .heatmap td.cell.active { outline: 2px solid var(--gsc-gold); }
+  @media (max-width: 760px) { .sens-explorer .controls, .sens-explorer .results { grid-template-columns: 1fr; } }
+
+  /* ---- Calculator ---- */
+  .calc { background: var(--gsc-navy); color: var(--white); padding: var(--s-7); border-radius: var(--r-2); position: relative; overflow: hidden; }
+  .calc::before { content:""; position: absolute; top:0; left:0; right:0; height:4px; background: var(--gsc-gold); }
+  .calc .header { display: flex; align-items: end; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-5); flex-wrap: wrap; }
+  .calc h3 { font-family: var(--font-display); font-weight: 800; color: var(--white); font-size: 22px; margin: 0; }
+  .calc .preset { display: flex; gap: 4px; background: rgba(255,255,255,.08); padding: 4px; border-radius: var(--r-1); }
+  .calc .preset button { background: transparent; color: var(--gsc-navy-20); border: none; padding: 8px 14px; font-family: var(--font-display); font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 2px; }
+  .calc .preset button.active { background: var(--gsc-gold); color: var(--gsc-navy); }
+  .calc .input-row { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-4) var(--s-5); background: rgba(0,0,0,.18); border-radius: var(--r-2); border: 1px solid rgba(255,255,255,.08); }
+  .calc .input-row .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--gsc-navy-20); flex-shrink: 0; }
+  .calc .input-row input { background: transparent; border: none; color: var(--white); font-family: var(--font-display); font-weight: 900; font-size: 32px; width: 100%; outline: none; font-variant-numeric: tabular-nums; }
+  .calc .results { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-3); margin-top: var(--s-5); }
+  .calc .results .r { padding: var(--s-3); border-left: 2px solid var(--gsc-gold); }
+  .calc .results .r .l { font-size: 10.5px; text-transform: uppercase; letter-spacing: .15em; color: var(--gsc-navy-20); }
+  .calc .results .r .v { font-family: var(--font-display); font-weight: 900; font-size: 26px; color: var(--white); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .calc .flow-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: var(--s-5); color: var(--white); }
+  .calc .flow-table th, .calc .flow-table td { padding: 8px 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,.08); font-variant-numeric: tabular-nums; }
+  .calc .flow-table th { color: var(--gsc-navy-20); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+  .calc .flow-table td.year { color: var(--gsc-gold); font-weight: 700; }
+  .calc .flow-table tr.total td { border-top: 2px solid var(--gsc-gold); font-weight: 800; }
+  .calc .tearsheet-cta { margin-top: var(--s-5); padding: var(--s-4); background: rgba(253,181,21,.10); border: 1px dashed rgba(253,181,21,.4); border-radius: var(--r-2); display: grid; grid-template-columns: 1fr auto; gap: var(--s-4); align-items: center; }
+  .calc .tearsheet-cta p { margin: 0; color: var(--gsc-navy-20); font-size: 13px; }
+  .calc .tearsheet-cta p strong { color: var(--gsc-gold); }
+  @media (max-width: 760px) { .calc .results { grid-template-columns: repeat(2,1fr); } .calc .tearsheet-cta { grid-template-columns: 1fr; } }
+
+  /* Tearsheet modal */
+  .ts-modal { position: fixed; inset: 0; z-index: 999; background: rgba(0,50,98,.92); display: none; align-items: center; justify-content: center; padding: var(--s-5); }
+  .ts-modal.open { display: flex; }
+  .ts-modal .panel { background: var(--white); padding: var(--s-7); border-radius: var(--r-2); max-width: 480px; width: 100%; position: relative; }
+  .ts-modal .panel::before { content:""; position: absolute; top:0; left:0; right:0; height:4px; background: var(--gsc-gold); }
+  .ts-modal h3 { font-family: var(--font-display); font-weight: 900; color: var(--gsc-navy); font-size: 24px; margin: 0 0 var(--s-3); }
+  .ts-modal p { color: var(--slate-700); font-size: 14px; line-height: 1.6; margin: 0 0 var(--s-4); }
+  .ts-modal .ts-success { display: none; text-align: center; padding: var(--s-5) 0; }
+  .ts-modal.success .ts-form { display: none; }
+  .ts-modal.success .ts-success { display: block; }
+  .ts-modal .check { width: 64px; height: 64px; border-radius: 50%; background: var(--success); color: var(--white); margin: 0 auto var(--s-4); display: flex; align-items: center; justify-content: center; font-size: 32px; }
+
+  /* ---- NOI animated line chart ---- */
+  .noi-svg { width: 100%; height: 240px; }
+  .noi-svg .grid { stroke: var(--slate-100); stroke-width: 1; }
+  .noi-svg .axis { stroke: var(--slate-300); stroke-width: 1; }
+  .noi-svg .axis-label { font-family: var(--font-display); font-size: 11px; fill: var(--slate-500); font-weight: 700; }
+  .noi-svg .line { fill: none; stroke: var(--gsc-navy); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1200; stroke-dashoffset: 1200; transition: stroke-dashoffset 2s ease-out; }
+  .noi-svg.draw .line { stroke-dashoffset: 0; }
+  .noi-svg .area { fill: url(#noiGrad); opacity: 0; transition: opacity 1s 1.5s ease-out; }
+  .noi-svg.draw .area { opacity: 1; }
+  .noi-svg .point { fill: var(--gsc-navy); stroke: var(--white); stroke-width: 2; r: 0; transition: r .3s; }
+  .noi-svg.draw .point { r: 5; transition: r .3s 1s; }
+  .noi-svg .point.stable { fill: var(--gsc-gold-deep); }
+  .noi-svg .point-label { font-family: var(--font-display); font-size: 12px; font-weight: 800; fill: var(--gsc-navy); font-variant-numeric: tabular-nums; opacity: 0; transition: opacity .5s 1.5s; }
+  .noi-svg.draw .point-label { opacity: 1; }
+
+  /* ---- Comparison widget ---- */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: stretch; }
+  .compare .panel { padding: var(--s-5); border-radius: var(--r-2); border: 1px solid var(--slate-100); background: var(--white); }
+  .compare .panel.featured { background: var(--gsc-navy); color: var(--white); border-color: var(--gsc-gold); position: relative; overflow: hidden; }
+  .compare .panel.featured::before { content:""; position: absolute; top:0; left:0; right:0; height:3px; background: var(--gsc-gold); }
+  .compare h4 { font-family: var(--font-display); font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 var(--s-3); color: var(--gsc-navy); }
+  .compare .panel.featured h4 { color: var(--gsc-gold); }
+  .compare .row { display: grid; grid-template-columns: 1fr auto; gap: var(--s-3); padding: 8px 0; border-bottom: 1px solid var(--slate-100); font-size: 14px; }
+  .compare .panel.featured .row { border-color: rgba(255,255,255,.08); color: var(--gsc-navy-20); }
+  .compare .row .v { font-weight: 800; color: var(--gsc-navy); font-variant-numeric: tabular-nums; }
+  .compare .panel.featured .row .v { color: var(--white); }
+  .compare .delta { margin-top: var(--s-4); padding: var(--s-3); background: var(--slate-50); border-radius: var(--r-1); font-size: 13px; color: var(--slate-700); }
+  .compare .panel.featured .delta { background: rgba(253,181,21,.1); color: var(--gsc-gold); font-weight: 700; }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+
+  /* ---- Q&A accordion ---- */
+  .qa { border-top: 1px solid var(--slate-100); }
+  .qa details { border-bottom: 1px solid var(--slate-100); }
+  .qa details summary { padding: var(--s-4) 0; cursor: pointer; font-family: var(--font-display); font-weight: 700; color: var(--gsc-navy); font-size: 16px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: var(--s-4); }
+  .qa details summary::-webkit-details-marker { display: none; }
+  .qa details summary::after { content: "+"; font-size: 24px; color: var(--gsc-gold-deep); font-weight: 300; transition: transform .2s; }
+  .qa details[open] summary::after { content: "−"; transform: rotate(0); }
+  .qa details p { padding: 0 0 var(--s-4); margin: 0; color: var(--slate-700); font-size: 14px; line-height: 1.65; max-width: 80ch; }
+
+  /* ---- Latest-update timeline ---- */
+  .updates { position: relative; padding-left: 32px; }
+  .updates::before { content:""; position: absolute; left: 9px; top: 8px; bottom: 8px; width: 2px; background: var(--gsc-gold); }
+  .updates .ev { position: relative; padding: 0 0 var(--s-5); }
+  .updates .ev::before { content:""; position: absolute; left: -28px; top: 6px; width: 10px; height: 10px; background: var(--gsc-navy); border: 2px solid var(--gsc-gold); border-radius: 50%; }
+  .updates .ev .date { font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: var(--gsc-gold-deep); font-weight: 700; }
+  .updates .ev h4 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 16px; margin: 4px 0 6px; }
+  .updates .ev p { font-size: 13.5px; color: var(--slate-700); line-height: 1.55; margin: 0; max-width: 72ch; }
+
+  /* ---- Team grid ---- */
+  .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-5); }
+  .team-card { background: var(--white); padding: var(--s-5); border: 1px solid var(--slate-100); border-radius: var(--r-2); transition: transform .2s, box-shadow .2s; }
+  .team-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .team-card .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--gsc-navy) center/cover no-repeat; color: var(--gsc-gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 700; font-size: 32px; margin-bottom: var(--s-4); border: 2px solid var(--gsc-gold); }
+  .team-card h4 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 16px; margin: 0 0 4px; }
+  .team-card .title { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--gsc-gold-deep); margin-bottom: var(--s-3); font-weight: 700; }
+  .team-card p { font-size: 13px; color: var(--slate-700); line-height: 1.55; margin: 0; }
+  @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; } }
+
+  /* ---- Case study ---- */
+  .case-study { background: var(--white); border: 1px solid var(--slate-100); border-radius: var(--r-2); overflow: hidden; }
+  .case-study .top { display: grid; grid-template-columns: 1fr 1fr; }
+  .case-study .img { aspect-ratio: 4/3; background-size: cover; background-position: center; min-height: 320px; }
+  .case-study .body { padding: var(--s-6); }
+  .case-study .body h3 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 22px; margin: var(--s-3) 0 var(--s-2); }
+  .case-study .body p { color: var(--ink); line-height: 1.6; font-size: 14px; margin: 0 0 var(--s-3); }
+  .case-study .body .mini-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--s-3); margin-top: var(--s-4); }
+  .case-study .body .mini-stats .ms { padding: var(--s-3); background: var(--slate-50); border-radius: var(--r-1); }
+  .case-study .body .mini-stats .ms .l { font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--slate-500); font-weight: 700; }
+  .case-study .body .mini-stats .ms .v { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 18px; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  @media (max-width: 900px) { .case-study .top { grid-template-columns: 1fr; } }
+
+  /* ---- Documents ---- */
+  .docs { border-top: 1px solid var(--slate-100); }
+  .doc-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s-5); padding: var(--s-4) 0; border-bottom: 1px solid var(--slate-100); }
+  .doc-row h4 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 16px; margin: 0 0 4px; }
+  .doc-row p { font-size: 13px; color: var(--slate-500); margin: 0; }
+
+  /* ---- Closing CTA ---- */
+  .closing { background: var(--gsc-navy); color: var(--white); padding: var(--s-9) var(--s-7); border-radius: var(--r-2); text-align: center; position: relative; overflow: hidden; }
+  .closing::before { content:""; position: absolute; top:0; left:0; right:0; height:4px; background: var(--gsc-gold); }
+  .closing h2 { font-family: var(--font-display); font-weight: 900; color: var(--gsc-gold); font-size: clamp(28px,4vw,40px); margin: 0 0 var(--s-3); }
+  .closing p { color: var(--gsc-navy-20); max-width: 56ch; margin: 0 auto var(--s-5); font-size: 16px; line-height: 1.6; }
+  .closing .actions { display: flex; gap: var(--s-3); justify-content: center; flex-wrap: wrap; }
+
+  /* ---- Mobile sticky CTA ---- */
+  .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--gsc-navy); padding: 12px 16px; z-index: 100; box-shadow: 0 -4px 16px rgba(0,0,0,.2); }
+  .mobile-cta::before { content:""; position: absolute; top:0; left:0; right:0; height:3px; background: var(--gsc-gold); }
+  .mobile-cta .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mobile-cta .btn { padding: 12px; font-size: 13px; }
+  @media (max-width: 760px) { .mobile-cta { display: block; } body { padding-bottom: 80px; } }
+
+  /* ---- Print stylesheet ---- */
+  @media print {
+    .nav-bar, .progress-rail, .mobile-cta, .gate, .lightbox, .ts-modal, .scroll-cue, .calc .tearsheet-cta { display: none !important; }
+    .hero { min-height: auto; padding: 24px; background: var(--gsc-navy) !important; }
+    .section { padding: 24px 0; page-break-inside: avoid; }
+    .closing { background: var(--gsc-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { padding-bottom: 0; }
+    a { color: var(--gsc-navy) !important; text-decoration: none; }
+  }
+
+  /* ---- Source notes / misc ---- */
+  .source-note { font-size: 12px; color: var(--slate-500); font-style: italic; margin-top: var(--s-3); }
+  .pill { display: inline-block; padding: 4px 10px; background: var(--gsc-gold-soft); color: var(--gsc-navy); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; border-radius: var(--r-1); }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     WATERMARK (personalized after gate accepts)
+     ============================================================ -->
+<div class="watermark" id="watermark"></div>
+
+<!-- ============================================================
+     ACCESS GATE
+     ============================================================ -->
+<div id="gate" class="gate active" role="dialog" aria-modal="true">
+  <div class="panel">
+    <span class="eyebrow">Confidential · Accredited Investors Only</span>
+    <h2 style="margin-top: var(--s-3);">Welcome to FlexWorks Denver II</h2>
+    <p>This deal page contains confidential information about a private real estate investment opportunity. Access is restricted to accredited investors with whom Greenwich Street Capital has an existing relationship or qualified investor referrals.</p>
+    <form id="gate-form">
+      <div class="form-field"><label>Full Name</label><input type="text" id="gate-name" required></div>
+      <div class="form-field"><label>Email</label><input type="email" id="gate-email" required></div>
+      <div class="form-field"><label>Firm / Family Office (optional)</label><input type="text" id="gate-firm"></div>
+      <label class="cb"><input type="checkbox" required>I am an accredited investor as defined by Rule 501 of Regulation D, or I have a pre-existing substantive relationship with Greenwich Street Capital.</label>
+      <label class="cb"><input type="checkbox" required>I agree to keep all materials confidential and not redistribute them.</label>
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">Continue to Deal</button>
+        <a href="mailto:info@greenwichstreetcap.com" class="btn btn-ghost">Contact GSC</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCROLL PROGRESS RAIL
+     ============================================================ -->
+<aside class="progress-rail" aria-hidden="true">
+  <div class="fill" id="rail-fill"></div>
+  <a class="dot" href="#summary" style="top: 8%;" data-label="Summary"><span class="label">Summary</span></a>
+  <a class="dot" href="#highlights" style="top: 20%;" data-label="Highlights"><span class="label">Highlights</span></a>
+  <a class="dot" href="#property" style="top: 32%;" data-label="Property"><span class="label">Property</span></a>
+  <a class="dot" href="#market" style="top: 44%;" data-label="Market"><span class="label">Market</span></a>
+  <a class="dot" href="#returns" style="top: 56%;" data-label="Returns"><span class="label">Returns</span></a>
+  <a class="dot" href="#sensitivity" style="top: 64%;" data-label="Sensitivity"><span class="label">Sensitivity</span></a>
+  <a class="dot" href="#calculator" style="top: 72%;" data-label="Calculator"><span class="label">Calculator</span></a>
+  <a class="dot" href="#team" style="top: 84%;" data-label="Team"><span class="label">Team</span></a>
+  <a class="dot" href="#documents" style="top: 92%;" data-label="Documents"><span class="label">Documents</span></a>
+</aside>
+
+<!-- ============================================================
+     STICKY NAV
+     ============================================================ -->
+<nav class="nav-bar" id="top">
+  <a class="brand" href="#top" aria-label="Greenwich Street Capital">
+    <span class="mono">GSC</span>
+    <span class="bar"></span>
+    <span class="word">Greenwich<br>Street<br>Capital</span>
+  </a>
+  <div class="nav-links">
+    <a href="#summary">Summary</a>
+    <a href="#property">Property</a>
+    <a href="#market">Market</a>
+    <a href="#returns">Returns</a>
+    <a href="#sensitivity">Sensitivity</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#team">Team</a>
+  </div>
+  <a class="btn btn-gold" href="#invest" data-track="nav-invest">Invest</a>
+</nav>
+
+<!-- ============================================================
+     HERO (cinematic)
+     ============================================================ -->
+<header class="hero" id="hero">
+  <div class="bg"></div>
+  <div class="parcel">
+    <svg viewBox="0 0 1920 760" preserveAspectRatio="xMidYMid slice">
+      <polygon points="280,260 1620,210 1700,520 1500,640 380,650 240,500"/>
+    </svg>
+  </div>
+  <span class="eyebrow">FlexWorks Denver II · Confidential</span>
+  <h1>A 52-unit flex storage value-add in North Central Denver.</h1>
+  <p class="sub">Acquiring 1800 East 69th Ave at <strong>$131 PSF — 37% below replacement cost</strong> — with rents 33% below market and a proven playbook running <strong>&lt;3 miles away</strong> at FlexWorks Denver I (Beach Street).</p>
+  <div class="hero-actions">
+    <a class="btn btn-gold" href="#summary" data-track="hero-view-deal">View the Deal</a>
+    <a class="btn btn-outline on-dark" href="#documents" data-track="hero-download">Download Memo</a>
+  </div>
+  <div class="hero-kpis">
+    <div class="k"><div class="label">Investor IRR</div><div class="value" data-counter="16.6" data-suffix="%" data-decimals="1">0%</div><div class="sub-l">Net, 5-year hold</div></div>
+    <div class="k"><div class="label">Equity Multiple</div><div class="value" data-counter="2.0" data-suffix="x" data-decimals="1">0x</div><div class="sub-l">Net to investors</div></div>
+    <div class="k"><div class="label">Stabilized YoC</div><div class="value" data-counter="8.3" data-suffix="%" data-decimals="1">0%</div><div class="sub-l">Year 3</div></div>
+    <div class="k"><div class="label">Min Investment</div><div class="value" data-counter="100" data-prefix="$" data-suffix="K">$0K</div><div class="sub-l">$2.55M total equity</div></div>
+  </div>
+  <div class="scroll-cue">Scroll to explore ↓</div>
+</header>
+
+<!-- ============================================================
+     LATEST UPDATE BAND
+     ============================================================ -->
+<section class="section" style="padding: var(--s-7) 0;">
+  <div class="container">
+    <div class="update-band reveal">
+      <div class="meta">Sponsor<br>Update<br>Apr 2026</div>
+      <div>
+        <h3>FlexWorks Denver I now signing leases 33% above underwriting</h3>
+        <p>At the comparable Beach Street property — acquired July 2024 — GSC is now signing new leases at <strong>$22–$24 PSF</strong>, vs. acquisition in-place rents of <strong>$14.71 PSF</strong>. The same playbook applies here at $14.32 PSF in-place against $21.24 PSF underwritten market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXECUTIVE SUMMARY
+     ============================================================ -->
+<section id="summary" class="section section-tinted anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Executive Summary</span>
+    <h2 class="h reveal">A nearly identical repeat of our proven playbook — at a 4% premium to Beach.</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="grid grid-2 reveal" style="margin-top: var(--s-6); align-items: start;">
+      <div>
+        <p style="font-size: 16px; line-height: 1.7; color: var(--ink);">1800 E 69th Ave is the opportunity to acquire a <strong>45,640 SF, 52-unit flex storage property</strong> in Denver's North Central submarket at <strong>$131 PSF — a 37% discount to replacement cost</strong>. 96% occupied with in-place rents 33% below market.</p>
+        <p style="font-size: 15px; line-height: 1.65; color: var(--slate-700); margin-top: var(--s-4);">GSC's business plan is a near-clone of FlexWorks Denver I (Beach Street). At Beach, in-place rents have moved from $14.71 PSF to signed new leases at <strong>$22–$24 PSF</strong>. The subject property's underwriting holds market rent to <strong>$21.24 PSF</strong> — a conservative 12% discount.</p>
+        <p style="font-size: 15px; line-height: 1.65; color: var(--slate-700); margin-top: var(--s-4);">The property will be rebranded under GSC's trademarked <strong>FlexWorks</strong> banner and managed by Storage Etc. Property Management (SEPM), expanding GSC's regional management efficiencies to a third asset.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="stat"><div class="stat-label">Purchase</div><div class="stat-value">$6.0M</div><div class="stat-sub">$131 PSF</div></div>
+        <div class="stat"><div class="stat-label">LP Equity</div><div class="stat-value">$2.55M</div><div class="stat-sub">37% of capital</div></div>
+        <div class="stat"><div class="stat-label">Hold</div><div class="stat-value">5 yrs</div><div class="stat-sub">Exit cap 6.50%</div></div>
+        <div class="stat"><div class="stat-label">Below Mkt</div><div class="stat-value">33%</div><div class="stat-sub">In-place rents</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INVESTMENT HIGHLIGHTS
+     ============================================================ -->
+<section id="highlights" class="section anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Why This Deal</span>
+    <h2 class="h reveal">Six Reasons to Invest</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="grid grid-3 reveal" style="margin-top: var(--s-6);">
+      <div class="highlight"><div class="stat-big">33%</div><div class="label">Mark-to-Market Opportunity</div><p>96% occupied with in-place rents ~33% below market. GSC underwrote $21.24 PSF — a conservative 12% discount to $24.00 PSF achieved at FlexWorks Denver I.</p></div>
+      <div class="highlight"><div class="stat-big">37%</div><div class="label">Discount to Replacement</div><p>$131 PSF contract is a 37% discount to estimated replacement cost. Exit at $210 PSF in Year 5 is still a 1% discount to today's replacement cost.</p></div>
+      <div class="highlight"><div class="stat-big">99%</div><div class="label">Beach Occupancy</div><p>FlexWorks Denver I runs consistent 99% occupancy with 1–2 qualified tours per week. &lt;4 weeks average downtime. Tenant demand is structurally deep.</p></div>
+      <div class="highlight"><div class="stat-big">300k+</div><div class="label">Residents Within 5 Miles</div><p>North Central is a true infill location at the convergence of I-25, I-76 and I-270 — between the two highest-income zip codes in Colorado.</p></div>
+      <div class="highlight"><div class="stat-big">0</div><div class="label">Competitive Supply</div><p>Zero competitive flex-storage projects under development within 10 miles. Closest new construction is large warehouse and traditional self-storage.</p></div>
+      <div class="highlight"><div class="stat-big">SEPM</div><div class="label">Institutional Management</div><p>Rebrand under FlexWorks. SEPM manages 3.0M+ SF since 1999. AI-driven leasing, modern website, expense recovery.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROPERTY PHOTOS (gallery + lightbox)
+     ============================================================ -->
+<section id="property" class="section section-tinted anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">The Property</span>
+    <h2 class="h reveal">52 units across 5 buildings on 3.10 acres.</h2>
+    <div class="gsc-rule reveal"></div>
+    <p class="lead reveal" style="margin-top: var(--s-4);">1985/86-vintage flex industrial park with 14'×14' drive-in doors, 16' clear height, in-unit power and gas heat. Photographs from a March 2026 walk.</p>
+    <div class="gallery reveal" style="margin-top: var(--s-6);" id="gallery">
+      <div class="tile t-1" data-src="assets/images/property/aerial-hero.jpg" data-caption="Aerial — 5 buildings, 56 overhead drive-in doors" style="background-image: url('assets/images/property/aerial-hero.jpg');"><div class="caption">Aerial — 5 buildings, 56 overhead drive-in doors</div></div>
+      <div class="tile t-2" data-src="assets/images/property/aerial-with-lease-sign.jpg" data-caption="Ground perspective with FOR LEASE signage" style="background-image: url('assets/images/property/aerial-with-lease-sign.jpg');"><div class="caption">Ground perspective with FOR LEASE signage</div></div>
+      <div class="tile t-3" data-src="assets/images/property/exterior-units-closeup.jpg" data-caption="Unit doors and tenant parking" style="background-image: url('assets/images/property/exterior-units-closeup.jpg');"><div class="caption">Unit doors and parking</div></div>
+      <div class="tile t-4" data-src="assets/images/property/roof-panorama.jpg" data-caption="Roof line panorama" style="background-image: url('assets/images/property/roof-panorama.jpg');"><div class="caption">Roof line panorama</div></div>
+      <div class="tile t-5" data-src="assets/images/property/roof-panorama-2.jpg" data-caption="Drive aisles" style="background-image: url('assets/images/property/roof-panorama-2.jpg');"><div class="caption">Drive aisles</div></div>
+      <div class="tile t-6" data-src="assets/images/property/aerial-with-outline.jpg" data-caption="3.10-acre parcel outlined" style="background-image: url('assets/images/property/aerial-with-outline.jpg');"><div class="caption">3.10-acre parcel outlined</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROPERTY SPECS
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Property Overview</span>
+    <h2 class="h reveal">Building Specs &amp; Land</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="specs reveal" style="margin-top: var(--s-6);">
+      <div>
+        <table>
+          <thead><tr><th colspan="2">Building Specs</th></tr></thead>
+          <tbody>
+            <tr><td>Address</td><td>1800 E 69th Ave</td></tr>
+            <tr><td>Submarket</td><td>Denver — North Central</td></tr>
+            <tr><td># of Buildings</td><td>5</td></tr>
+            <tr><td>Year Built</td><td>1985 / 86</td></tr>
+            <tr><td>Net Rentable Area</td><td>45,640 SF</td></tr>
+            <tr><td>Unit Mix</td><td>52 units (41× 840 SF)</td></tr>
+            <tr><td>Tenants / Occupancy</td><td>47 / 96%</td></tr>
+            <tr><td>Construction</td><td>Metal Frame on Slab</td></tr>
+            <tr><td>Shell</td><td>Insulated Metal Wrap</td></tr>
+            <tr><td>Clear Height</td><td>16'</td></tr>
+            <tr><td>Drive-In Doors</td><td>56 overhead</td></tr>
+            <tr><td>Man-Doors</td><td>50</td></tr>
+            <tr><td>In-Unit Power</td><td>110 / 220v</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th colspan="2">Land Details</th></tr></thead>
+          <tbody>
+            <tr><td>Lot Size</td><td>3.10 acres</td></tr>
+            <tr><td>Coverage Ratio</td><td>33%</td></tr>
+            <tr><td>Zoning</td><td>Adams County I-2</td></tr>
+            <tr><td>Special Zone</td><td>Enterprise Zone (EZ)</td></tr>
+            <tr><td>Parcel #</td><td>0182502105009</td></tr>
+            <tr><td>Subdivision</td><td>Franklin Industrial Annex</td></tr>
+            <tr><td>Parking Surface</td><td>Asphalt</td></tr>
+          </tbody>
+        </table>
+        <h4 style="font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 14px; margin: var(--s-6) 0 var(--s-3); text-transform: uppercase; letter-spacing: .1em;">Unit Amenities</h4>
+        <ul style="font-size: 14px; color: var(--slate-700); padding-left: 18px; line-height: 1.7; margin: 0;">
+          <li>Oversized drive-in door + separate man-door</li>
+          <li>16' clear height · ceiling-suspended gas heater</li>
+          <li>220-volt or 110-volt electrical outlets</li>
+          <li>Two shared full-size restrooms · wide drive aisles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARKET / MAP
+     ============================================================ -->
+<section id="market" class="section section-tinted anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Denver — North Central</span>
+    <h2 class="h reveal">Infill flex at the I-25 / I-76 / I-270 convergence.</h2>
+    <div class="gsc-rule reveal"></div>
+
+    <div class="map-toggle reveal" id="map-toggle" style="margin-top: var(--s-5);">
+      <button class="active" data-layer="property">Property</button>
+      <button data-layer="comps">+ Comparables</button>
+      <button data-layer="flexworks">+ FlexWorks I</button>
+    </div>
+    <div id="map" class="reveal fallback"></div>
+
+    <div class="grid grid-2 reveal" style="align-items: start; margin-top: var(--s-6);">
+      <div>
+        <p style="color: var(--ink); line-height: 1.7;">The property sits at the convergence of I-25, I-76 and I-270 — between the two highest-income zip codes in Colorado (Denver 80238 and Arvada 80007). Denver MSA is the 19th-largest in the U.S. with 2.9% projected GDP growth in 2026 (vs. 2.2% national).</p>
+        <p style="color: var(--ink); line-height: 1.65; margin-top: var(--s-3);">North Central is the primary infill industrial submarket with higher occupancy and rents than I-70/I-76 and Airport. <strong>In-place rents at Beach moved from $14.71 to $24 PSF in 18 months</strong> — the subject property's $14.32 in-place against $21.24 underwritten market is a conservative mark-to-market path.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="stat"><div class="stat-label">Sub-20k SF Vacancy</div><div class="stat-value">3.7%</div><div class="stat-sub">Q3 2025 · CBRE</div></div>
+        <div class="stat"><div class="stat-label">Beach Rent Growth</div><div class="stat-value">+30%</div><div class="stat-sub">$18 → $24 PSF since 2024</div></div>
+        <div class="stat"><div class="stat-label">5-Mi Population</div><div class="stat-value">300k+</div><div class="stat-sub">Within trade area</div></div>
+        <div class="stat"><div class="stat-label">Denver MSA GDP Growth</div><div class="stat-value">2.9%</div><div class="stat-sub">2026 projection · BLS</div></div>
+      </div>
+    </div>
+    <p class="source-note">Sources: CBRE, Colliers, Cushman &amp; Wakefield, GSC underwriting (April 2026)</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LEASE COMPARABLES
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Lease Comparables</span>
+    <h2 class="h reveal">Underwriting $21.24 PSF — a discount to peer comp.</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="comps-wrap reveal" style="margin-top: var(--s-5);">
+      <table class="comps">
+        <thead><tr><th>Property</th><th>City</th><th>Type</th><th class="num">Avg SF</th><th class="num">$/PSF</th><th class="num">$/Mo</th></tr></thead>
+        <tbody>
+          <tr class="subject"><td>Subject — 1800 E 69th Ave</td><td>Denver</td><td>Flex Storage</td><td class="num">878</td><td class="num">$21.24</td><td class="num">$1,553</td></tr>
+          <tr><td>FlexWorks I — 6232 Beach St</td><td>Denver</td><td>Flex Storage</td><td class="num">900</td><td class="num">$24.00</td><td class="num">$1,800</td></tr>
+          <tr><td>Simply Storage 'Maker Units'</td><td>Arvada</td><td>Flex Storage</td><td class="num">1,000</td><td class="num">$24.00</td><td class="num">$2,000</td></tr>
+          <tr><td>2001 E 74th Ave</td><td>Denver</td><td>Small-Bay</td><td class="num">2,100</td><td class="num">$20.50</td><td class="num">$3,588</td></tr>
+          <tr><td>2531 W 62nd Ct</td><td>Denver</td><td>Small-Bay</td><td class="num">1,316</td><td class="num">$21.54</td><td class="num">$2,362</td></tr>
+          <tr><td>5950 Sheridan Blvd</td><td>Arvada</td><td>Small-Bay</td><td class="num">1,753</td><td class="num">$21.50</td><td class="num">$3,076</td></tr>
+          <tr><td>Personal Warehouse (3 props)</td><td>CO Front Range</td><td>Man Cave</td><td class="num">1,364</td><td class="num">$26.67</td><td class="num">$3,026</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="source-note">Weighted average across comps: $23.67 PSF · GSC underwrites the subject at $21.24 PSF — a conservative 10% discount.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     BUSINESS PLAN
+     ============================================================ -->
+<section class="section section-tinted">
+  <div class="container">
+    <span class="eyebrow reveal">Value Creation</span>
+    <h2 class="h reveal">Business Plan</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="timeline reveal" style="margin-top: var(--s-6);">
+      <div class="step"><div class="num">1</div><h4>Acquire</h4><p>Close May 2026 at $131 PSF — 37% below replacement cost</p></div>
+      <div class="step"><div class="num">2</div><h4>Improve Mgmt</h4><p>Install SEPM, AI revenue management, FlexWorks brand</p></div>
+      <div class="step"><div class="num">3</div><h4>Facility Upgrades</h4><p>Paving, signage, fencing, gate, security, paint</p></div>
+      <div class="step"><div class="num">4</div><h4>Mark to Market</h4><p>Roll leases to $21+ PSF over 2 years (vs. $14.32 in-place)</p></div>
+      <div class="step"><div class="num">5</div><h4>Cash Flow / Exit</h4><p>Stabilize at 8.3% YoC year 3 · 5-yr hold · refi optional</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RETURNS / SOURCES & USES
+     ============================================================ -->
+<section id="returns" class="section anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Underwriting</span>
+    <h2 class="h reveal">Sources, Uses &amp; Returns</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="grid grid-2 reveal" style="margin-top: var(--s-6); align-items: start;">
+      <table class="deal-table">
+        <caption>Sources &amp; Uses</caption>
+        <thead><tr><th>Item</th><th class="num">$ / SF</th><th class="num">$ Total</th></tr></thead>
+        <tbody>
+          <tr><td>Purchase Price</td><td class="num">$131</td><td class="num">$6,000,000</td></tr>
+          <tr><td>Closing Costs</td><td class="num">$3</td><td class="num">$125,000</td></tr>
+          <tr><td>Capital Improvements</td><td class="num">$15</td><td class="num">$672,552</td></tr>
+          <tr><td>Acquisition Fee</td><td class="num">$2</td><td class="num">$105,000</td></tr>
+          <tr><td>Interest &amp; Reserves</td><td class="num">$1</td><td class="num">$32,411</td></tr>
+          <tr><td>Loan Fees</td><td class="num">$1</td><td class="num">$35,000</td></tr>
+          <tr class="total"><td>Total Uses</td><td class="num">$153</td><td class="num">$6,969,963</td></tr>
+          <tr><td>Debt (63.4% LTC)</td><td class="num">$97</td><td class="num">$4,420,000</td></tr>
+          <tr><td>Equity (36.6%)</td><td class="num">$56</td><td class="num">$2,549,963</td></tr>
+          <tr class="total"><td>Total Sources</td><td class="num">$153</td><td class="num">$6,969,963</td></tr>
+        </tbody>
+      </table>
+      <table class="deal-table">
+        <caption>Projected Returns</caption>
+        <thead><tr><th>Metric</th><th class="num">Unlevered</th><th class="num">Levered</th></tr></thead>
+        <tbody>
+          <tr><td>Hold Period</td><td class="num" colspan="2">5 Years</td></tr>
+          <tr><td>Year 1 Cap Rate</td><td class="num" colspan="2">4.2%</td></tr>
+          <tr><td>Untrended YoC</td><td class="num" colspan="2">7.3%</td></tr>
+          <tr><td>Stabilized YoC (Yr 3)</td><td class="num" colspan="2">8.3%</td></tr>
+          <tr><td>IRR</td><td class="num">12.6%</td><td class="num">22.0%</td></tr>
+          <tr><td>Equity Multiple</td><td class="num">1.7x</td><td class="num">2.4x</td></tr>
+          <tr class="total" style="background: var(--gsc-gold-soft);"><td>Net Investor IRR</td><td class="num" colspan="2">16.6%</td></tr>
+          <tr class="total" style="background: var(--gsc-gold-soft);"><td>Net Investor EM</td><td class="num" colspan="2">2.0x</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="reveal" style="font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 22px; margin: var(--s-7) 0 var(--s-3);">Projected NOI</h3>
+    <svg class="noi-svg reveal" id="noi-svg" viewBox="0 0 800 240" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="noiGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#003262" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#003262" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <!-- Grid -->
+      <line class="grid" x1="40" y1="40" x2="780" y2="40"/>
+      <line class="grid" x1="40" y1="100" x2="780" y2="100"/>
+      <line class="grid" x1="40" y1="160" x2="780" y2="160"/>
+      <line class="axis" x1="40" y1="200" x2="780" y2="200"/>
+      <!-- Axis labels -->
+      <text class="axis-label" x="5" y="44">$700k</text>
+      <text class="axis-label" x="5" y="104">$500k</text>
+      <text class="axis-label" x="5" y="164">$300k</text>
+      <text class="axis-label" x="5" y="204">$100k</text>
+      <!-- Area + Line: values normalized to chart space -->
+      <!-- Year 1 PF $493k=~75, Y1 $255k=~170, Y2 $389k=~125, Y3 $562k=~55, Y4 $585k=~50, Y5 $604k=~46, Y6 $623k=~42 -->
+      <path class="area" d="M80,75 L200,170 L320,125 L440,55 L560,50 L680,46 L780,42 L780,200 L80,200 Z"/>
+      <path class="line" d="M80,75 L200,170 L320,125 L440,55 L560,50 L680,46 L780,42"/>
+      <!-- Points -->
+      <circle class="point" cx="80" cy="75"/>   <text class="point-label" x="80" y="60" text-anchor="middle">$493k</text>
+      <circle class="point" cx="200" cy="170"/> <text class="point-label" x="200" y="186" text-anchor="middle">$255k</text>
+      <circle class="point" cx="320" cy="125"/> <text class="point-label" x="320" y="115" text-anchor="middle">$389k</text>
+      <circle class="point stable" cx="440" cy="55"/>  <text class="point-label" x="440" y="40" text-anchor="middle" fill="#B8860B">$562k</text>
+      <circle class="point stable" cx="560" cy="50"/>  <text class="point-label" x="560" y="35" text-anchor="middle" fill="#B8860B">$585k</text>
+      <circle class="point stable" cx="680" cy="46"/>  <text class="point-label" x="680" y="31" text-anchor="middle" fill="#B8860B">$604k</text>
+      <circle class="point stable" cx="780" cy="42"/>  <text class="point-label" x="770" y="27" text-anchor="end" fill="#B8860B">$623k</text>
+      <!-- Year labels -->
+      <text class="axis-label" x="80" y="220" text-anchor="middle">Yr 1 PF</text>
+      <text class="axis-label" x="200" y="220" text-anchor="middle">Yr 1</text>
+      <text class="axis-label" x="320" y="220" text-anchor="middle">Yr 2</text>
+      <text class="axis-label" x="440" y="220" text-anchor="middle">Yr 3</text>
+      <text class="axis-label" x="560" y="220" text-anchor="middle">Yr 4</text>
+      <text class="axis-label" x="680" y="220" text-anchor="middle">Yr 5</text>
+      <text class="axis-label" x="780" y="220" text-anchor="end">Yr 6</text>
+    </svg>
+    <p class="source-note">Year 1 PF = stabilized look-back at acquisition. Gold points = stabilized period (Year 3+). Year 1 dip reflects mark-to-market lease rollover and concessions during repositioning.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SENSITIVITY EXPLORER (interactive)
+     ============================================================ -->
+<section id="sensitivity" class="section section-tinted anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Stress Test</span>
+    <h2 class="h reveal">Sensitivity Explorer</h2>
+    <div class="gsc-rule reveal"></div>
+    <p class="lead reveal">Drag the sliders to see how exit cap and market rent move investor returns. The heatmap below shows every combination — yours is outlined in gold.</p>
+
+    <div class="sens-explorer reveal" style="margin-top: var(--s-6);">
+      <div class="header">
+        <div><h3>Live Returns</h3><p class="sub">Base case highlighted in gold. Drag to model alternate scenarios.</p></div>
+      </div>
+      <div class="controls">
+        <div class="ctrl">
+          <div class="label"><span>Exit Cap Rate</span><span class="val" id="sens-exit-val">6.50%</span></div>
+          <input type="range" id="sens-exit" min="550" max="750" value="650" step="25">
+          <div style="display:flex; justify-content:space-between; font-size:10px; color: rgba(255,255,255,.4); margin-top:6px;"><span>5.50%</span><span>6.50% (base)</span><span>7.50%</span></div>
+        </div>
+        <div class="ctrl">
+          <div class="label"><span>Market Rent ($/PSF)</span><span class="val" id="sens-rent-val">$21.24</span></div>
+          <input type="range" id="sens-rent" min="1911" max="2336" value="2124" step="20">
+          <div style="display:flex; justify-content:space-between; font-size:10px; color: rgba(255,255,255,.4); margin-top:6px;"><span>$19.11 (-10%)</span><span>$21.24 (base)</span><span>$23.36 (+10%)</span></div>
+        </div>
+      </div>
+      <div class="results">
+        <div class="r"><div class="l">Net Investor IRR</div><div class="v" id="sens-irr">16.6%</div><div class="vs" id="sens-irr-vs">Base case</div></div>
+        <div class="r"><div class="l">Net Investor EM</div><div class="v" id="sens-em">2.0x</div><div class="vs" id="sens-em-vs">Base case</div></div>
+        <div class="r"><div class="l">Stabilized YoC</div><div class="v" id="sens-yoc">8.3%</div><div class="vs" id="sens-yoc-vs">Year 3</div></div>
+      </div>
+      <div class="heatmap">
+        <table id="sens-heatmap">
+          <thead><tr><th></th><th colspan="5">Market Rent →</th></tr><tr><th>Exit Cap ↓</th><th>$19.11</th><th>$20.18</th><th>$21.24</th><th>$22.30</th><th>$23.36</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INVESTOR CALCULATOR (with email tearsheet)
+     ============================================================ -->
+<section id="calculator" class="section anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Personalize</span>
+    <h2 class="h reveal">Investor Cash Flow Calculator</h2>
+    <div class="gsc-rule reveal"></div>
+    <p class="lead reveal">See projected cash flows on your specific investment amount. Returns are net to investor based on the Base Case.</p>
+
+    <div class="calc reveal" style="margin-top: var(--s-6);">
+      <div class="header">
+        <h3>Your Investment</h3>
+        <div class="preset" id="preset">
+          <button data-amount="100000" class="active">$100K</button>
+          <button data-amount="250000">$250K</button>
+          <button data-amount="500000">$500K</button>
+          <button data-amount="1000000">$1M</button>
+        </div>
+      </div>
+      <div class="input-row"><span class="label">Amount</span><input type="text" id="calc-input" value="$100,000"></div>
+      <div class="results">
+        <div class="r"><div class="l">Net IRR</div><div class="v">16.6%</div></div>
+        <div class="r"><div class="l">Net EM</div><div class="v">2.0x</div></div>
+        <div class="r"><div class="l">Total Profit</div><div class="v" id="r-profit">$99,023</div></div>
+        <div class="r"><div class="l">Total Distributions</div><div class="v" id="r-total">$199,023</div></div>
+      </div>
+      <table class="flow-table"><thead><tr><th style="text-align:left;">Year</th><th>Cash Flow</th><th>Cum. Cash</th><th>Multiple</th></tr></thead><tbody id="flow-body"></tbody></table>
+      <div class="tearsheet-cta">
+        <p>Get a <strong>personalized one-page tear sheet</strong> with your projection emailed to you in 30 seconds.</p>
+        <button class="btn btn-gold" id="open-ts" data-track="tearsheet-open">Email Me My Projection</button>
+      </div>
+    </div>
+    <p class="source-note">Projections are estimates based on the Investment Memorandum underwriting. Actual results will differ. Past performance is not a guarantee.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMPARISON WIDGET (vs S&P / REIT / Treasury)
+     ============================================================ -->
+<section class="section section-tinted">
+  <div class="container">
+    <span class="eyebrow reveal">In Context</span>
+    <h2 class="h reveal">FlexWorks Denver II vs. Public Markets</h2>
+    <div class="gsc-rule reveal"></div>
+    <p class="lead reveal">Same $250k invested for 5 years across different vehicles. Illustrative — public-market returns are historical averages.</p>
+
+    <div class="compare reveal" style="margin-top: var(--s-6);">
+      <div class="panel featured">
+        <h4>FlexWorks Denver II (Projected)</h4>
+        <div class="row"><span>Annualized return</span><span class="v">16.6%</span></div>
+        <div class="row"><span>Equity multiple</span><span class="v">2.0x</span></div>
+        <div class="row"><span>$250k → 5 yrs</span><span class="v">$497k</span></div>
+        <div class="row"><span>Tax treatment</span><span class="v">Depreciation shield</span></div>
+        <div class="delta">+$247k more than 5-yr Treasury · +$152k more than S&amp;P historical avg</div>
+      </div>
+      <div>
+        <div class="panel" style="margin-bottom: var(--s-3);">
+          <h4>S&amp;P 500 (Historical avg)</h4>
+          <div class="row"><span>Annualized return</span><span class="v">~10.0%</span></div>
+          <div class="row"><span>$250k → 5 yrs</span><span class="v">~$402k</span></div>
+          <div class="row"><span>Liquidity</span><span class="v">Daily</span></div>
+        </div>
+        <div class="panel" style="margin-bottom: var(--s-3);">
+          <h4>Vanguard REIT ETF (VNQ, 10-yr avg)</h4>
+          <div class="row"><span>Annualized return</span><span class="v">~6.5%</span></div>
+          <div class="row"><span>$250k → 5 yrs</span><span class="v">~$343k</span></div>
+          <div class="row"><span>Liquidity</span><span class="v">Daily</span></div>
+        </div>
+        <div class="panel">
+          <h4>5-Year US Treasury</h4>
+          <div class="row"><span>Yield</span><span class="v">~4.2%</span></div>
+          <div class="row"><span>$250k → 5 yrs</span><span class="v">~$307k</span></div>
+          <div class="row"><span>Risk</span><span class="v">Risk-free</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="source-note">Public-market returns are long-run historical averages, not guarantees. Real-estate projections carry market, operational, and liquidity risk that public markets do not. Consult your advisor.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CASE STUDY
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Case Study</span>
+    <h2 class="h reveal">FlexWorks Denver I (Beach Street)</h2>
+    <div class="gsc-rule reveal"></div>
+    <p class="lead reveal">The proof point — acquired July 2024, less than 3 miles away.</p>
+    <div class="case-study reveal" style="margin-top: var(--s-6);">
+      <div class="top">
+        <div class="img" style="background-image: url('assets/images/case_study/flexworks-denver-i-exterior.jpg');"></div>
+        <div class="body">
+          <span class="pill">Acquired July 2024 · 6232 Beach St</span>
+          <h3>Same playbook, now signing leases 33% above underwriting.</h3>
+          <p>52,750 SF / 59-unit flex storage acquired at $126 PSF, 97% occupied with rents ~18% below market. Within the first year, GSC signed new leases <strong>33% above underwritten market — 50% higher than acquisition in-place</strong>.</p>
+          <div class="mini-stats">
+            <div class="ms"><div class="l">Acq Price / PSF</div><div class="v">$6.65M / $126</div></div>
+            <div class="ms"><div class="l">Loan / LTV</div><div class="v">$3.50M / 53%</div></div>
+            <div class="ms"><div class="l">Acq In-Place Rent</div><div class="v">$14.71 PSF</div></div>
+            <div class="ms"><div class="l">Today's Rents</div><div class="v">$22–24 PSF</div></div>
+            <div class="ms"><div class="l">Stab. YoC</div><div class="v">8.4% (Yr 4)</div></div>
+            <div class="ms"><div class="l">UW Net Return</div><div class="v">15.6% IRR · 1.8x</div></div>
+          </div>
+          <p class="source-note" style="margin-top: var(--s-4);">Return metrics are from acquisition underwriting and do not reflect post-acquisition performance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TEAM
+     ============================================================ -->
+<section id="team" class="section section-tinted anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">The Sponsor</span>
+    <h2 class="h reveal">Greenwich Street Capital &amp; Co-Sponsors</h2>
+    <div class="gsc-rule reveal"></div>
+    <p class="lead reveal">GSC's principals and partners have collectively invested in and managed nearly $4 billion of commercial real estate. This is the partnership's third flex-storage acquisition together.</p>
+    <div class="team-grid reveal" style="margin-top: var(--s-6);">
+      <div class="team-card">
+        <div class="avatar" style="background-image: url('assets/images/team/conner-thomas.jpg');"></div>
+        <h4>Conner Thomas</h4>
+        <div class="title">Founder · GSC</div>
+        <p>9 years in direct CRE investing at Bridge Industrial, DWS/RREEF Management, and Morgan Stanley. Acquired, managed, and disposed of <strong>$3.9B+</strong> of real estate. Career began at JMP Securities. UC Berkeley, Statistics.</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">GH</div>
+        <h4>Greg Houge</h4>
+        <div class="title">Co-Founder · Storage Etc.</div>
+        <p>30+ years self-storage. Co-founded Storage Etc., LLC in 1999 and served as President through late 2023, after selling a <strong>$335M portfolio</strong> to a CBRE Investment Management-overseen private REIT. UCLA, Economics.</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">DJ</div>
+        <h4>Doug Jensen</h4>
+        <div class="title">Principal · Storage Etc.</div>
+        <p>President of Dano Companies, Partner of Douglas Allred Company, Principal of Storage Etc. <strong>40+ years CRE</strong> experience. Partnered with Greg since 1999. USC, Economics &amp; International Relations.</p>
+      </div>
+      <div class="team-card">
+        <div class="avatar">DT</div>
+        <h4>David Thomas</h4>
+        <div class="title">Advisor · LBA Realty</div>
+        <p>40+ years in investment sales, tenant negotiations, development, and asset management. Joined LBA Realty in 1993 as one of four original partners. UC Berkeley, Resource Economics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LATEST UPDATES TIMELINE
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Latest Updates</span>
+    <h2 class="h reveal">What's happened since the IM</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="updates reveal" style="margin-top: var(--s-6); max-width: 720px;">
+      <div class="ev"><div class="date">May 28, 2026</div><h4>Deal site v2 live</h4><p>Updated underwriting reflected, interactive sensitivity explorer added.</p></div>
+      <div class="ev"><div class="date">May 5, 2026</div><h4>Due diligence expiration</h4><p>Phase I/II environmental came back clean; no remediation required. Title and survey reviewed.</p></div>
+      <div class="ev"><div class="date">April 22, 2026</div><h4>FlexWorks Denver I signs new lease at $24 PSF</h4><p>Continues the 33% above-UW trend at Beach Street.</p></div>
+      <div class="ev"><div class="date">April 1, 2026</div><h4>Investment Memorandum issued</h4><p>32-page IM circulated to family-office and HNW investor network.</p></div>
+      <div class="ev"><div class="date">March 21, 2026</div><h4>Purchase &amp; Sale Agreement executed</h4><p>$6.0M contract price · 45-day DD · 21-day close · closing May 26, 2026.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Q&A
+     ============================================================ -->
+<section class="section section-tinted">
+  <div class="container">
+    <span class="eyebrow reveal">Investor FAQ</span>
+    <h2 class="h reveal">Questions we get asked</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="qa reveal" style="margin-top: var(--s-6); max-width: 880px;">
+      <details><summary>What if rents don't move to market as quickly as projected?</summary><p>The sensitivity analysis shows a -10% market rent scenario still delivers <strong>8.1% net investor IRR / 1.4x EM</strong>. Our underwriting also assumes elevated physical vacancy and rental concessions in years 1-2 to account for tenant turnover — far more conservative than what we've seen at FlexWorks Denver I where 99% occupancy held during repositioning.</p></details>
+      <details><summary>Why is this priced so close to Beach Street despite Beach's strong performance?</summary><p>The seller is a hands-off private owner who under-manages for occupancy rather than rent. Beach's $126 PSF basis was acquired in a similar dynamic two years ago. The 4% premium reflects time value and Beach's improved comp data — not a sponsor markup.</p></details>
+      <details><summary>What's the downside on the building's age (1985/86)?</summary><p>Closing conditions in the PSA obligate the seller to complete or credit major deferred maintenance (asphalt/paving, unit heaters, insulation, roof). We're carrying the full $673k estimate as a conservative reserve and expect to reduce the budget post-DD.</p></details>
+      <details><summary>What's the GSC co-investment in this deal?</summary><p>Manager co-invest is 10–15% of equity ($250k minimum, 10% required). GSC's economics are aligned with investors through co-investment, an 8% preferred return, and a 60/40 GP/LP split only above a 15% IRR.</p></details>
+      <details><summary>How liquid is this investment?</summary><p>Flex-storage leases are typically 6-12 months, giving us flexibility on reversion timing. Base case is a 5-year hold; there are no illiquid windows due to major tenants or remaining lease terms. A successful refi at year 2 returns capital while preserving the equity position.</p></details>
+      <details><summary>What's the depreciation / tax treatment?</summary><p>Upon acquisition, GSC will perform a cost-segregation analysis to accelerate depreciation. This typically generates significant paper losses in years 1-3 that offset cash distributions, materially improving the after-tax IRR for high-tax-bracket investors. Consult your tax advisor for personalized treatment.</p></details>
+      <details><summary>How do you handle environmental risk on an older industrial building?</summary><p>Pre-PSA, the seller performed Phase I and Phase II ESA assessments. Phase II scope was prepared by GSC and our environmental consultant — came back clean with no remediation required. We're phasing out the small number of auto-related tenants from the rent roll over the lease cycle.</p></details>
+      <details><summary>What happens if interest rates move significantly?</summary><p>Acquisition debt is SOFR + 80 bps with a 3-year interest rate cap acquired at close. Stabilization refinance is sized to a conservative 12% debt yield at T+225 — we expect actual refi terms to price tighter (9-10% debt yield), creating refi upside not in the base case.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DOCUMENTS
+     ============================================================ -->
+<section id="documents" class="section anchor-offset">
+  <div class="container">
+    <span class="eyebrow reveal">Data Room</span>
+    <h2 class="h reveal">Documents</h2>
+    <div class="gsc-rule reveal"></div>
+    <div class="docs reveal" style="margin-top: var(--s-6); max-width: 920px;">
+      <div class="doc-row"><div><h4>Confidential Investment Summary</h4><p>32-page property &amp; underwriting overview · PDF · April 2026</p></div><a class="btn btn-outline" href="#" data-track="doc-im">Download</a></div>
+      <div class="doc-row"><div><h4>Private Placement Memorandum (PPM)</h4><p>Subscription documents and full risk factors · PDF</p></div><a class="btn btn-outline" href="#contact" data-track="doc-ppm">Request access</a></div>
+      <div class="doc-row"><div><h4>Operating Model</h4><p>Annual Pro Forma + sensitivities · XLSX</p></div><a class="btn btn-outline" href="#contact" data-track="doc-model">Request access</a></div>
+      <div class="doc-row"><div><h4>FlexWorks Denver I — Case Study</h4><p>Performance update on the Beach Street comparable</p></div><a class="btn btn-outline" href="#contact" data-track="doc-case">Open</a></div>
+      <div class="doc-row"><div><h4>Title, Survey, Phase I/II Environmental</h4><p>Due diligence materials available upon request</p></div><a class="btn btn-outline" href="#contact" data-track="doc-dd">Request access</a></div>
+      <div class="doc-row"><div><h4>Rent Roll · As of 3/16/2026</h4><p>Unit-level rent roll with lease expiration schedule</p></div><a class="btn btn-outline" href="#contact" data-track="doc-rr">Request access</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CLOSING CTA
+     ============================================================ -->
+<section id="invest" class="section anchor-offset">
+  <div class="container">
+    <div class="closing reveal">
+      <h2>Ready to invest?</h2>
+      <p>Closing is scheduled for May 26, 2026. Request the full PPM and operating model, or schedule a 30-minute call with the principals.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="mailto:info@greenwichstreetcap.com?subject=FlexWorks%20Denver%20II%20%E2%80%94%20Request%20Materials" data-track="invest-request">Request Materials</a>
+        <a class="btn btn-outline on-dark" href="#contact" data-track="invest-call">Schedule a Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="section section-tinted">
+  <div class="container-narrow">
+    <span class="eyebrow reveal">Get in Touch</span>
+    <h2 class="h reveal">Send us a note</h2>
+    <div class="gsc-rule reveal"></div>
+    <form class="reveal" style="max-width: 640px; margin-top: var(--s-5);" id="contact-form">
+      <div class="grid grid-2">
+        <div class="form-field"><label>First Name</label><input type="text" required></div>
+        <div class="form-field"><label>Last Name</label><input type="text" required></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="form-field"><label>Email</label><input type="email" required></div>
+        <div class="form-field"><label>Phone</label><input type="tel"></div>
+      </div>
+      <div class="form-field"><label>Investor Type</label><select><option>Family Office</option><option>RIA</option><option>HNW Individual</option><option>Institutional</option><option>Other</option></select></div>
+      <div class="form-field"><label>Interest Level</label><select><option>$100k – $250k</option><option>$250k – $500k</option><option>$500k – $1M</option><option>$1M+</option><option>Exploring</option></select></div>
+      <div class="form-field"><label>Message</label><textarea rows="4" placeholder="Anything you'd like us to know before our call..."></textarea></div>
+      <button type="submit" class="btn btn-primary" data-track="contact-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer-bar">
+  <div class="footer-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <span style="font-family: var(--font-serif); font-weight: 700; color: var(--white); font-size: 36px; line-height:1;">GSC</span>
+        <span style="display:block; width:1px; height:34px; background: var(--gsc-gold);"></span>
+        <span style="font-family: var(--font-display); font-weight:400; color: var(--gsc-navy-20); font-size:11px; text-transform:uppercase; letter-spacing:.12em; line-height:1.3;">Greenwich<br>Street<br>Capital</span>
+      </div>
+      <p>Owner, operator, and manager of small-bay industrial and flex-storage real estate in high-growth Sun Belt and Mountain West markets.</p>
+    </div>
+    <div>
+      <h5>This Deal</h5>
+      <a href="#summary">Summary</a><a href="#property">Property</a><a href="#market">Market</a><a href="#returns">Returns</a><a href="#calculator">Calculator</a><a href="#team">Team</a><a href="#documents">Documents</a>
+    </div>
+    <div>
+      <h5>Greenwich Street Capital</h5>
+      <a href="https://www.greenwichstreetcap.com">greenwichstreetcap.com</a><a href="mailto:info@greenwichstreetcap.com">info@greenwichstreetcap.com</a><a href="https://www.linkedin.com/company/greenwich-street-cap/">LinkedIn →</a><a href="http://app.junipersquare.com/i/greenwichstreetcap">Investor Portal</a>
+    </div>
+  </div>
+</footer>
+
+<section style="background: var(--slate-50); padding: var(--s-6) 0;">
+  <div class="container">
+    <div class="disclaimer">
+      <strong>Confidential Investment Summary</strong>
+      This Investment Summary is being provided to you solely for discussion purposes and contains confidential information not intended for public use or distribution. The recipient agrees that it will not divulge any such information to any other party and will not reproduce or distribute this Investment Summary or any related materials, in whole or in part, without the prior written consent of Greenwich Street Capital. This does not constitute an offer to sell or the solicitation of an offer to buy any securities. Any offering will only be made pursuant to a definitive confidential private placement memorandum. Forward-looking statements are subject to substantial risks and uncertainties; actual results will differ. Past performance is not an indication of future results.
+    </div>
+  </div>
+</section>
+
+<!-- Mobile sticky CTA -->
+<div class="mobile-cta"><div class="row">
+  <a class="btn btn-gold" href="mailto:info@greenwichstreetcap.com" data-track="mcta-request">Request Info</a>
+  <a class="btn btn-outline on-dark" href="#calculator" data-track="mcta-calc">Calculator</a>
+</div></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" aria-label="Close">×</button>
+  <button class="lb-nav lb-prev" aria-label="Previous">‹</button>
+  <img id="lb-img" alt="">
+  <button class="lb-nav lb-next" aria-label="Next">›</button>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<!-- Tearsheet modal -->
+<div class="ts-modal" id="ts-modal" role="dialog" aria-modal="true">
+  <div class="panel">
+    <div class="ts-form">
+      <span class="eyebrow">Personalized Tear Sheet</span>
+      <h3 style="margin-top: var(--s-3);">Email me my projection</h3>
+      <p>We'll send a one-page PDF with your investment amount, year-by-year cash flows, and a link to book a call.</p>
+      <form id="ts-form">
+        <div class="form-field"><label>Full Name</label><input type="text" id="ts-name" required></div>
+        <div class="form-field"><label>Email</label><input type="email" id="ts-email" required></div>
+        <div class="form-field"><label>Investment Amount</label><input type="text" id="ts-amount" readonly></div>
+        <div class="actions" style="display:flex; gap: var(--s-3); margin-top: var(--s-4);">
+          <button type="submit" class="btn btn-primary">Send my tear sheet</button>
+          <button type="button" class="btn btn-ghost" id="ts-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div class="ts-success">
+      <div class="check">✓</div>
+      <h3>Sent!</h3>
+      <p>Your personalized tear sheet is on its way to your inbox. Conner will follow up within 24 hours.</p>
+      <button class="btn btn-outline" id="ts-done">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CONFIG — edit these before deploying
+// ============================================================
+window.GSC_CONFIG = {
+  // Mapbox token (free tier at mapbox.com). Empty = falls back to static map image.
+  MAPBOX_TOKEN: "",
+  // API base — set to your deployed Vercel URL (e.g. "https://deals.greenwichstreetcap.com")
+  // Empty = log to console only (dev mode).
+  API_BASE: "",
+  // Calendly URL for "Schedule a Call" (placeholder)
+  CALENDLY_URL: "https://calendly.com/conner-thomas-gsc/30min",
+  // Subject property coordinates
+  PROPERTY_COORDS: [-104.9678, 39.8147],
+  // FlexWorks I (Beach) coordinates
+  FLEXWORKS_I_COORDS: [-105.018, 39.798],
+  // Comp coordinates [lng, lat, label]
+  COMPS: [
+    [-105.020, 39.834, "FlexWorks Denver I — $24.00 PSF"],
+    [-105.066, 39.832, "Simply Storage Maker Units — $24.00 PSF"],
+    [-104.962, 39.825, "2001 E 74th Ave — $20.50 PSF"],
+    [-105.045, 39.812, "2531 W 62nd Ct — $21.54 PSF"],
+    [-105.052, 39.806, "5950 Sheridan Blvd — $21.50 PSF"],
+  ],
+};
+
+// ============================================================
+// TRACKING — sends events to your backend (or logs to console in dev)
+// ============================================================
+async function track(event, props = {}) {
+  const payload = {
+    event,
+    props,
+    investor: window.GSC_INVESTOR || null,
+    page: "FlexWorks Denver II",
+    ts: new Date().toISOString(),
+    referrer: document.referrer,
+    path: window.location.pathname,
+  };
+  if (!window.GSC_CONFIG.API_BASE) {
+    console.log("[track]", event, payload);
+    return;
+  }
+  try {
+    await fetch(window.GSC_CONFIG.API_BASE + "/api/track", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    });
+  } catch (e) { /* ignore */ }
+}
+
+// ============================================================
+// ACCESS GATE
+// ============================================================
+const gate = document.getElementById('gate');
+document.getElementById('gate-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('gate-name').value.trim();
+  const email = document.getElementById('gate-email').value.trim();
+  const firm = document.getElementById('gate-firm').value.trim();
+  window.GSC_INVESTOR = { name, email, firm };
+  localStorage.setItem('gsc_investor', JSON.stringify(window.GSC_INVESTOR));
+  document.getElementById('watermark').textContent = `${name} · CONFIDENTIAL`;
+  document.getElementById('watermark').classList.add('active');
+  gate.classList.remove('active');
+  track('gate-accepted', { name, email, firm });
+  startCounters();
+});
+// Restore session if available
+const saved = localStorage.getItem('gsc_investor');
+if (saved) {
+  window.GSC_INVESTOR = JSON.parse(saved);
+  document.getElementById('watermark').textContent = `${window.GSC_INVESTOR.name} · CONFIDENTIAL`;
+  document.getElementById('watermark').classList.add('active');
+  gate.classList.remove('active');
+  setTimeout(startCounters, 200);
+}
+
+// ============================================================
+// ANIMATED KPI COUNTERS
+// ============================================================
+function startCounters() {
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const target = parseFloat(el.dataset.counter);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = (target * eased).toFixed(decimals);
+      el.textContent = prefix + v + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+  // Mark hero as loaded for the bg zoom-in
+  document.getElementById('hero').classList.add('loaded');
+}
+
+// ============================================================
+// SCROLL: progress rail + parcel reveal + active dot
+// ============================================================
+const railFill = document.getElementById('rail-fill');
+const dots = document.querySelectorAll('.progress-rail .dot');
+const sections = ['summary','highlights','property','market','returns','sensitivity','calculator','team','documents'].map(id => document.getElementById(id));
+
+function onScroll() {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (window.scrollY / h) * 100;
+  railFill.style.height = Math.min(100, pct) + '%';
+  // Hero parcel: reveal when user has scrolled past 100px
+  if (window.scrollY > 100) document.getElementById('hero').classList.add('parcel-drawn');
+  // Active dot
+  let activeIdx = 0;
+  sections.forEach((s, i) => { if (s && s.getBoundingClientRect().top < 200) activeIdx = i; });
+  dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// ============================================================
+// INTERSECTION OBSERVER — reveal animations + NOI chart draw
+// ============================================================
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      en.target.classList.add('in');
+      if (en.target.id === 'noi-svg') en.target.classList.add('draw');
+      io.unobserve(en.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ============================================================
+// LIGHTBOX
+// ============================================================
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCap = document.getElementById('lb-caption');
+const tiles = [...document.querySelectorAll('#gallery .tile')];
+let lbIdx = 0;
+function openLb(idx) {
+  lbIdx = idx;
+  const t = tiles[idx];
+  lbImg.src = t.dataset.src;
+  lbCap.textContent = t.dataset.caption;
+  lightbox.classList.add('open');
+  track('lightbox-open', { caption: t.dataset.caption });
+}
+function closeLb() { lightbox.classList.remove('open'); }
+function navLb(d) { openLb((lbIdx + d + tiles.length) % tiles.length); }
+tiles.forEach((t, i) => t.addEventListener('click', () => openLb(i)));
+lightbox.querySelector('.lb-close').addEventListener('click', closeLb);
+lightbox.querySelector('.lb-prev').addEventListener('click', () => navLb(-1));
+lightbox.querySelector('.lb-next').addEventListener('click', () => navLb(1));
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowRight') navLb(1);
+  if (e.key === 'ArrowLeft') navLb(-1);
+});
+
+// ============================================================
+// MAP (Mapbox if token set, fallback to static image)
+// ============================================================
+function initMap() {
+  if (!window.GSC_CONFIG.MAPBOX_TOKEN) return; // fallback already shown via CSS class
+  const script = document.createElement('script');
+  script.src = "https://api.mapbox.com/mapbox-gl-js/v3.0.0/mapbox-gl.js";
+  script.onload = () => {
+    mapboxgl.accessToken = window.GSC_CONFIG.MAPBOX_TOKEN;
+    const el = document.getElementById('map');
+    el.classList.remove('fallback');
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: window.GSC_CONFIG.PROPERTY_COORDS,
+      zoom: 11,
+    });
+    // Subject pin (gold)
+    new mapboxgl.Marker({ color: '#FDB515' })
+      .setLngLat(window.GSC_CONFIG.PROPERTY_COORDS)
+      .setPopup(new mapboxgl.Popup().setHTML('<strong>Subject Property</strong><br>1800 E 69th Ave'))
+      .addTo(map);
+
+    let compMarkers = [], beachMarker = null;
+    document.querySelectorAll('#map-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#map-toggle button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Clear
+        compMarkers.forEach(m => m.remove()); compMarkers = [];
+        if (beachMarker) { beachMarker.remove(); beachMarker = null; }
+        const layer = btn.dataset.layer;
+        track('map-layer', { layer });
+        if (layer === 'comps') {
+          window.GSC_CONFIG.COMPS.forEach(c => {
+            const m = new mapboxgl.Marker({ color: '#003262' })
+              .setLngLat([c[0], c[1]])
+              .setPopup(new mapboxgl.Popup().setHTML('<strong>'+c[2]+'</strong>'))
+              .addTo(map);
+            compMarkers.push(m);
+          });
+        } else if (layer === 'flexworks') {
+          beachMarker = new mapboxgl.Marker({ color: '#B8860B' })
+            .setLngLat(window.GSC_CONFIG.FLEXWORKS_I_COORDS)
+            .setPopup(new mapboxgl.Popup().setHTML('<strong>FlexWorks Denver I (Beach)</strong><br>Acquired July 2024 · $126 PSF'))
+            .addTo(map);
+          map.flyTo({ center: window.GSC_CONFIG.FLEXWORKS_I_COORDS, zoom: 12 });
+        }
+      });
+    });
+  };
+  document.head.appendChild(script);
+}
+initMap();
+
+// ============================================================
+// SENSITIVITY EXPLORER
+// ============================================================
+// Sensitivity data: net investor IRR as function of (exitCapBps, marketRentCents)
+// Derived from the sensitivity table in the IM (interpolated where needed)
+// Rows = exit cap (5.5, 6.0, 6.5, 7.0, 7.5)
+// Cols = market rent ($19.11, $20.18, $21.24, $22.30, $23.36)
+const IRR_GRID = [
+  // 5.50% exit
+  [12.6, 17.0, 21.2, 22.7, 24.1],
+  // 6.00%
+  [10.2, 14.5, 18.8, 21.5, 24.0],
+  // 6.50% (base row — middle col is 16.6%)
+  [ 8.1, 12.3, 16.6, 20.5, 24.1],
+  // 7.00%
+  [ 6.0, 10.2, 14.5, 19.0, 23.5],
+  // 7.50%
+  [ 3.9,  8.0, 11.9, 16.5, 21.0],
+];
+const EM_GRID = [
+  [1.7, 1.9, 2.4, 2.5, 2.6],
+  [1.5, 1.8, 2.2, 2.4, 2.5],
+  [1.4, 1.7, 2.0, 2.3, 2.4],
+  [1.3, 1.6, 1.8, 2.1, 2.3],
+  [1.2, 1.5, 1.7, 2.0, 2.2],
+];
+const YOC_GRID = [
+  [6.8, 7.5, 8.3, 9.0, 9.6],
+  [6.8, 7.5, 8.3, 9.0, 9.6],
+  [6.8, 7.5, 8.3, 9.0, 9.6],
+  [6.8, 7.5, 8.3, 9.0, 9.6],
+  [6.8, 7.5, 8.3, 9.0, 9.6],
+];
+const BASE_IRR = 16.6, BASE_EM = 2.0;
+
+function bilerp(grid, ri, ci) {
+  // ri, ci are float indices into a 5x5 grid
+  const r0 = Math.floor(ri), r1 = Math.min(4, r0 + 1);
+  const c0 = Math.floor(ci), c1 = Math.min(4, c0 + 1);
+  const fr = ri - r0, fc = ci - c0;
+  return (
+    grid[r0][c0] * (1 - fr) * (1 - fc) +
+    grid[r0][c1] * (1 - fr) * fc +
+    grid[r1][c0] * fr * (1 - fc) +
+    grid[r1][c1] * fr * fc
+  );
+}
+
+function updateSens() {
+  const exitBps = parseInt(document.getElementById('sens-exit').value, 10);
+  const rentCents = parseInt(document.getElementById('sens-rent').value, 10);
+  document.getElementById('sens-exit-val').textContent = (exitBps / 100).toFixed(2) + '%';
+  document.getElementById('sens-rent-val').textContent = '$' + (rentCents / 100).toFixed(2);
+  // Map to grid indices: exitBps 550-750 step 50 -> 0-4
+  const ri = (exitBps - 550) / 50;
+  // rentCents 1911-2336 -> map to col 0-4 (centers at 1911, 2018, 2124, 2230, 2336)
+  const ci = (rentCents - 1911) / ((2336 - 1911) / 4);
+  const irr = bilerp(IRR_GRID, ri, ci);
+  const em  = bilerp(EM_GRID, ri, ci);
+  const yoc = bilerp(YOC_GRID, ri, ci);
+  const irrEl = document.getElementById('sens-irr');
+  const emEl = document.getElementById('sens-em');
+  const yocEl = document.getElementById('sens-yoc');
+  irrEl.textContent = irr.toFixed(1) + '%';
+  emEl.textContent = em.toFixed(1) + 'x';
+  yocEl.textContent = yoc.toFixed(1) + '%';
+  // Color by delta from base
+  irrEl.classList.remove('up','down'); emEl.classList.remove('up','down');
+  if (irr > BASE_IRR + 0.5) irrEl.classList.add('up');
+  else if (irr < BASE_IRR - 0.5) irrEl.classList.add('down');
+  if (em > BASE_EM + 0.05) emEl.classList.add('up');
+  else if (em < BASE_EM - 0.05) emEl.classList.add('down');
+  document.getElementById('sens-irr-vs').textContent = irr > BASE_IRR ? `+${(irr-BASE_IRR).toFixed(1)}% vs. base` : (irr < BASE_IRR ? `${(irr-BASE_IRR).toFixed(1)}% vs. base` : 'Base case');
+  document.getElementById('sens-em-vs').textContent  = em > BASE_EM  ? `+${(em-BASE_EM).toFixed(2)}x vs. base` : (em < BASE_EM ? `${(em-BASE_EM).toFixed(2)}x vs. base` : 'Base case');
+  // Heatmap active cell
+  document.querySelectorAll('#sens-heatmap td.cell').forEach(td => td.classList.remove('active'));
+  const activeR = Math.round(ri), activeC = Math.round(ci);
+  const idx = activeR * 5 + activeC;
+  const cells = document.querySelectorAll('#sens-heatmap td.cell');
+  if (cells[idx]) cells[idx].classList.add('active');
+}
+function colorForIrr(v) {
+  // Map IRR (4 to 24+) to navy → gold gradient
+  const t = Math.max(0, Math.min(1, (v - 4) / 20));
+  // Mix navy (#003262) → gold (#FDB515)
+  const r = Math.round(0   + t * (253 - 0));
+  const g = Math.round(50  + t * (181 - 50));
+  const b = Math.round(98  + t * (21  - 98));
+  return `rgba(${r},${g},${b},0.75)`;
+}
+function buildHeatmap() {
+  const tbody = document.querySelector('#sens-heatmap tbody');
+  const exitLabels = ['5.50%','6.00%','6.50%','7.00%','7.50%'];
+  let html = '';
+  for (let r = 0; r < 5; r++) {
+    html += `<tr><th>${exitLabels[r]}</th>`;
+    for (let c = 0; c < 5; c++) {
+      html += `<td class="cell" style="background:${colorForIrr(IRR_GRID[r][c])}" data-r="${r}" data-c="${c}" title="${IRR_GRID[r][c].toFixed(1)}% IRR · ${EM_GRID[r][c].toFixed(1)}x">${IRR_GRID[r][c].toFixed(1)}%</td>`;
+    }
+    html += '</tr>';
+  }
+  tbody.innerHTML = html;
+  tbody.addEventListener('click', (e) => {
+    const td = e.target.closest('td.cell');
+    if (!td) return;
+    const r = parseInt(td.dataset.r, 10);
+    const c = parseInt(td.dataset.c, 10);
+    document.getElementById('sens-exit').value = 550 + r * 50;
+    document.getElementById('sens-rent').value = 1911 + Math.round(c * ((2336 - 1911) / 4));
+    updateSens();
+    track('sens-heatmap-click', { exitCapBps: 550 + r * 50 });
+  });
+}
+buildHeatmap();
+document.getElementById('sens-exit').addEventListener('input', () => { updateSens(); track('sens-exit-slide'); });
+document.getElementById('sens-rent').addEventListener('input', () => { updateSens(); track('sens-rent-slide'); });
+updateSens();
+
+// ============================================================
+// CALCULATOR (with tearsheet flow)
+// ============================================================
+const BASE_AMOUNT = 250000;
+const BASE_FLOWS = [-250000, 2888, 19269, 19417, 21620, 434364];
+function fmt(n) { const neg = n < 0; const s = '$' + Math.abs(n).toLocaleString('en-US',{maximumFractionDigits:0}); return neg ? '(' + s + ')' : s; }
+function parseAmount(s) { const n = parseInt(s.replace(/[^0-9]/g,''),10); return isNaN(n) ? 0 : n; }
+function renderCalc(amount) {
+  const scale = amount / BASE_AMOUNT;
+  const flows = BASE_FLOWS.map(f => Math.round(f * scale));
+  const tbody = document.getElementById('flow-body');
+  let cum = 0, html = '';
+  flows.forEach((f, i) => {
+    cum += f;
+    const mult = (cum + amount) / amount;
+    const isLast = i === flows.length - 1;
+    html += `<tr ${isLast ? 'class="total"' : ''}>
+      <td class="year" style="text-align:left;">${i === 0 ? 'Initial' : 'Year ' + i}</td>
+      <td>${fmt(f)}</td>
+      <td>${i === 0 ? '—' : fmt(cum)}</td>
+      <td>${i === 0 ? '—' : mult.toFixed(2) + 'x'}</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+  const totalDist = flows.slice(1).reduce((a, b) => a + b, 0);
+  document.getElementById('r-total').textContent = '$' + totalDist.toLocaleString('en-US',{maximumFractionDigits:0});
+  document.getElementById('r-profit').textContent = '$' + (totalDist - amount).toLocaleString('en-US',{maximumFractionDigits:0});
+}
+const calcInput = document.getElementById('calc-input');
+calcInput.addEventListener('input', () => {
+  const v = parseAmount(calcInput.value);
+  if (v > 0) {
+    calcInput.value = '$' + v.toLocaleString('en-US');
+    renderCalc(v);
+    document.querySelectorAll('#preset button').forEach(b => b.classList.remove('active'));
+    const match = document.querySelector(`#preset button[data-amount="${v}"]`);
+    if (match) match.classList.add('active');
+    track('calc-input', { amount: v });
+  }
+});
+document.querySelectorAll('#preset button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#preset button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const amt = parseInt(btn.dataset.amount, 10);
+    calcInput.value = '$' + amt.toLocaleString('en-US');
+    renderCalc(amt);
+    track('calc-preset', { amount: amt });
+  });
+});
+renderCalc(100000);
+
+// Tearsheet
+const tsModal = document.getElementById('ts-modal');
+document.getElementById('open-ts').addEventListener('click', () => {
+  document.getElementById('ts-amount').value = calcInput.value;
+  if (window.GSC_INVESTOR) {
+    document.getElementById('ts-name').value = window.GSC_INVESTOR.name || '';
+    document.getElementById('ts-email').value = window.GSC_INVESTOR.email || '';
+  }
+  tsModal.classList.add('open');
+});
+document.getElementById('ts-cancel').addEventListener('click', () => tsModal.classList.remove('open'));
+document.getElementById('ts-done').addEventListener('click', () => { tsModal.classList.remove('open','success'); });
+document.getElementById('ts-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('ts-name').value.trim();
+  const email = document.getElementById('ts-email').value.trim();
+  const amount = parseAmount(document.getElementById('ts-amount').value);
+  track('tearsheet-submit', { name, email, amount });
+  if (window.GSC_CONFIG.API_BASE) {
+    try {
+      await fetch(window.GSC_CONFIG.API_BASE + "/api/tearsheet", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name, email, amount, deal: "FlexWorks Denver II" }),
+      });
+    } catch (e) { /* ignore */ }
+  } else {
+    console.log("[tearsheet] would send to backend", { name, email, amount });
+  }
+  tsModal.classList.add('success');
+});
+
+// ============================================================
+// TRACK CLICKS on any element with data-track
+// ============================================================
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-track]');
+  if (el) track(el.dataset.track, { text: el.textContent.trim().slice(0, 40) });
+});
+
+// ============================================================
+// CONTACT FORM
+// ============================================================
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {};
+  e.target.querySelectorAll('input, select, textarea').forEach(f => {
+    const label = f.previousElementSibling ? f.previousElementSibling.textContent.trim() : f.name || 'field';
+    data[label] = f.value;
+  });
+  track('contact-submit', data);
+  if (window.GSC_CONFIG.API_BASE) {
+    try {
+      await fetch(window.GSC_CONFIG.API_BASE + "/api/track", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ event: "contact-form", props: data, investor: window.GSC_INVESTOR }),
+      });
+    } catch (e) { /* ignore */ }
+  }
+  alert('Thank you — GSC will be in touch within 24 hours.');
+  e.target.reset();
+});
+
+// ============================================================
+// INITIAL TRACK
+// ============================================================
+track('page-view');
+onScroll();
+</script>
+
+</body>
+</html>

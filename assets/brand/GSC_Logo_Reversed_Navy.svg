@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 190" width="620" height="190" role="img" aria-label="Greenwich Street Capital">
+  <title>Greenwich Street Capital — Reversed (Navy)</title>
+  <rect width="620" height="190" fill="#003262"/>
+  <text x="40" y="135" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="105" fill="#FFFFFF" letter-spacing="-2">GSC</text>
+  <rect x="340" y="52" width="2" height="90" fill="#FDB515"/>
+  <g font-family="'Helvetica Neue', Arial, sans-serif" font-weight="400" font-size="28" fill="#FFFFFF">
+    <text x="360" y="78">Greenwich</text>
+    <text x="360" y="112">Street</text>
+    <text x="360" y="146">Capital</text>
+  </g>
+</svg>

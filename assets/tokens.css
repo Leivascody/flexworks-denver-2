@@ -1,0 +1,118 @@
+/* ============================================================================
+   Greenwich Street Capital — Design Tokens
+   v1.0 · May 2026
+
+   Link from your <head>:
+     <link rel="stylesheet" href="/brand/tokens.css">
+
+   Reference every value in your component CSS via var(--token).
+   Never hardcode brand colors or spacing values in components.
+   ========================================================================== */
+
+:root {
+  /* ── Brand colors ──────────────────────────────────────────── */
+  --gsc-navy:        #003262;
+  --gsc-navy-90:     #1A4775;
+  --gsc-navy-70:     #4D7197;
+  --gsc-navy-20:     #CCD6E0;
+  --gsc-navy-08:     #EBEFF4;
+  --gsc-gold:        #FDB515;
+  --gsc-gold-deep:   #B8860B;
+  --gsc-gold-soft:   #FDE9B0;
+  --gsc-steel:       #8099B1;
+
+  /* ── Neutrals ──────────────────────────────────────────────── */
+  --white:    #FFFFFF;
+  --ink:      #11212F;
+  --slate-700:#334155;
+  --slate-500:#64748B;
+  --slate-300:#CBD5E1;
+  --slate-100:#F1F5F9;
+  --slate-50: #F8FAFC;
+  --black:    #000000;
+
+  /* ── Semantic ──────────────────────────────────────────────── */
+  --success: #137752;
+  --warning: #B45309;
+  --danger:  #B42318;
+  --info:    var(--gsc-navy);
+
+  /* ── Type families ─────────────────────────────────────────── */
+  --font-display: "Nunito Sans", "Avenir Next", "Avenir LT Pro", "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Nunito Sans", "Avenir Next", "Avenir LT Pro", "Helvetica Neue", Arial, sans-serif;
+  --font-serif:   "Source Serif 4", Georgia, "Palatino Linotype", "Book Antiqua", serif;
+  --font-mono:    "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* ── Type scale ────────────────────────────────────────────── */
+  --fs-display-1: clamp(40px, 5vw, 56px);
+  --fs-display-2: 40px;
+  --fs-h1:        32px;
+  --fs-h2:        24px;
+  --fs-h3:        20px;
+  --fs-h4:        15px;
+  --fs-lead:      18px;
+  --fs-body:      16px;
+  --fs-caption:   12.5px;
+  --fs-overline:  11px;
+
+  --lh-tight:     1.1;
+  --lh-snug:      1.25;
+  --lh-normal:    1.55;
+  --lh-relaxed:   1.7;
+
+  --tracking-tight:    -.01em;
+  --tracking-normal:   0;
+  --tracking-eyebrow:  .12em;
+  --tracking-overline: .22em;
+
+  /* ── Spacing (4-pt grid) ───────────────────────────────────── */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10:128px;
+
+  /* ── Radius ────────────────────────────────────────────────── */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-3: 8px;
+  --r-pill: 999px;
+
+  /* ── Shadows ───────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(17,33,47,.06);
+  --shadow-md: 0 4px 12px rgba(17,33,47,.08);
+  --shadow-lg: 0 12px 32px rgba(17,33,47,.10);
+  --shadow-focus: 0 0 0 3px rgba(0,50,98,.30);
+
+  /* ── Layout ────────────────────────────────────────────────── */
+  --container: 1200px;
+  --container-narrow: 960px;
+  --measure: 70ch;
+  --gutter: 32px;
+  --gutter-mobile: 20px;
+
+  /* ── Motion ────────────────────────────────────────────────── */
+  --motion-fast: .15s ease;
+  --motion-base: .25s ease;
+  --motion-slow: .4s ease;
+}
+
+/* ── Base reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--ink);
+  background: var(--white);
+}
+img, svg, video { display: block; max-width: 100%; height: auto; }
+button { font: inherit; cursor: pointer; }

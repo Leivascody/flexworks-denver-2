@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 96" width="360" height="96" role="img" aria-label="FlexWorks">
+  <title>FlexWorks</title>
+  <!-- Stacked navy bars (industrial mark) -->
+  <g fill="#003262">
+    <polygon points="20,68 60,52 100,68 100,80 60,64 20,80"/>
+    <polygon points="20,52 60,36 100,52 100,64 60,48 20,64"/>
+    <polygon points="20,36 60,20 100,36 100,48 60,32 20,48"/>
+  </g>
+  <!-- "Flex" in light weight + "WORKS" boxed -->
+  <text x="120" y="62" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="400" font-size="44" fill="#003262">Flex</text>
+  <rect x="220" y="26" width="124" height="48" fill="#003262"/>
+  <text x="282" y="62" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="36" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">WORKS</text>
+</svg>
