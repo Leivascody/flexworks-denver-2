@@ -71,11 +71,11 @@
   .hero::after { content:""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gsc-gold); z-index: 3; }
   .hero > * { position: relative; z-index: 2; color: var(--white); }
   .hero .eyebrow { color: var(--gsc-gold); opacity: 0; animation: fadeUp .8s .3s forwards; }
-  .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(36px,5vw,60px); line-height: 1.05; margin: var(--s-4) 0 var(--s-3); max-width: 900px; opacity: 0; animation: fadeUp .8s .5s forwards; }
+  .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(28px,5vw,60px); line-height: 1.08; margin: var(--s-4) 0 var(--s-3); max-width: 900px; opacity: 0; animation: fadeUp .8s .5s forwards; }
   .hero .sub { color: var(--gsc-navy-20); font-size: 18px; line-height: 1.55; max-width: 720px; opacity: 0; animation: fadeUp .8s .7s forwards; }
   .hero .sub strong { color: var(--white); }
-  .hero .hero-actions { margin-top: var(--s-5); display: flex; gap: var(--s-3); flex-wrap: wrap; opacity: 0; animation: fadeUp .8s .9s forwards; }
-  .hero .hero-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-5); margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid rgba(255,255,255,.18); max-width: 920px; opacity: 0; animation: fadeUp .8s 1.1s forwards; }
+  .hero .hero-actions { margin-top: var(--s-6); display: flex; gap: var(--s-3); flex-wrap: wrap; opacity: 0; animation: fadeUp .8s .9s forwards; }
+  .hero .hero-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-5); margin-top: var(--s-8); padding-top: var(--s-6); border-top: 1px solid rgba(255,255,255,.18); max-width: 920px; opacity: 0; animation: fadeUp .8s 1.1s forwards; }
   .hero .hero-kpis .k .label { font-size: 11px; text-transform: uppercase; letter-spacing: .18em; color: var(--gsc-navy-20); }
   .hero .hero-kpis .k .value { font-family: var(--font-display); font-weight: 900; font-size: 38px; line-height: 1; color: var(--white); margin-top: 6px; font-variant-numeric: tabular-nums; }
   .hero .hero-kpis .k .sub-l { font-size: 11px; color: var(--gsc-navy-20); margin-top: 4px; }
@@ -93,7 +93,8 @@
   @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
 
   /* ---- Section / reveal ---- */
-  .section h2.h { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: clamp(28px,3.5vw,40px); line-height: 1.1; margin: 0 0 var(--s-3); }
+  .section h2.h { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: clamp(28px,3.5vw,40px); line-height: 1.1; margin: 0 0 var(--s-3); max-width: 24ch; }
+  .section h2.h.wide { max-width: none; }
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
   .anchor-offset { scroll-margin-top: 80px; }
@@ -105,7 +106,7 @@
   .update-band p { font-size: 14px; color: var(--ink); line-height: 1.6; margin: 0; }
 
   /* ---- Highlights ---- */
-  .highlight { background: var(--white); border: 1px solid var(--slate-100); border-left: 3px solid var(--gsc-gold); border-radius: 0 var(--r-2) var(--r-2) 0; padding: var(--s-5); transition: transform .2s; }
+  .highlight { background: var(--white); border: 1px solid var(--slate-100); border-left: 3px solid var(--gsc-gold); border-radius: 0 var(--r-2) var(--r-2) 0; padding: var(--s-6); transition: transform .2s; }
   .highlight:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
   .highlight .stat-big { font-family: var(--font-display); font-weight: 900; color: var(--gsc-navy); font-size: 36px; line-height: 1; margin-bottom: var(--s-2); font-variant-numeric: tabular-nums; }
   .highlight .label { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 14px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: var(--s-2); }
@@ -294,8 +295,8 @@
   .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-5); }
   .team-card { background: var(--white); padding: var(--s-5); border: 1px solid var(--slate-100); border-radius: var(--r-2); transition: transform .2s, box-shadow .2s; }
   .team-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-  .team-card .avatar { width: 96px; height: 96px; border-radius: 50%; background: var(--gsc-navy) center/cover no-repeat; color: var(--gsc-gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 700; font-size: 32px; margin-bottom: var(--s-4); border: 2px solid var(--gsc-gold); overflow: hidden; }
-  .team-card .avatar[style*='url'] { color: transparent; }
+  .team-card .avatar { position: relative; width: 96px; height: 96px; border-radius: 50%; background: var(--gsc-navy); color: var(--gsc-gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-weight: 700; font-size: 32px; margin-bottom: var(--s-4); border: 2px solid var(--gsc-gold); overflow: hidden; }
+  .team-card .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .team-card h4 { font-family: var(--font-display); font-weight: 800; color: var(--gsc-navy); font-size: 16px; margin: 0 0 4px; }
   .team-card .title { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--gsc-gold-deep); margin-bottom: var(--s-3); font-weight: 700; }
   .team-card p { font-size: 13px; color: var(--slate-700); line-height: 1.55; margin: 0; }
@@ -333,6 +334,8 @@
   .mobile-cta::before { content:""; position: absolute; top:0; left:0; right:0; height:3px; background: var(--gsc-gold); }
   .mobile-cta .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .mobile-cta .btn { padding: 12px; font-size: 13px; }
+  .mobile-cta .btn.btn-outline { background: transparent !important; color: var(--white) !important; border: 1.5px solid var(--white) !important; }
+  .mobile-cta .btn.btn-outline:hover { background: var(--white); color: var(--gsc-navy); }
   @media (max-width: 760px) { .mobile-cta { display: block; } body { padding-bottom: 80px; } }
     .section { padding: 24px 0; page-break-inside: avoid; }
     .closing { background: var(--gsc-navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -914,27 +917,27 @@
     <p class="lead reveal">GSC's principals and partners have collectively invested in and managed nearly $4 billion of commercial real estate. This is the partnership's third flex-storage acquisition together.</p>
     <div class="team-grid reveal" style="margin-top: var(--s-6);">
       <div class="team-card">
-        <div class="avatar" style="background-image: url('assets/images/team/conner-thomas.jpg');"></div>
+        <div class="avatar">CT<img src="assets/images/team/conner-thomas.jpg" alt="" onerror="this.remove()"></div>
         <h4>Conner Thomas</h4>
         <div class="title">Founder · GSC</div>
         <p>9 years in direct CRE investing at Bridge Industrial, DWS/RREEF Management, and Morgan Stanley. Acquired, managed, and disposed of <strong>$3.9B+</strong> of real estate. Career began at JMP Securities. UC Berkeley, Statistics.</p>
       </div>
       <div class="team-card">
-        <div class="avatar" style="background-image: url('assets/images/team/greg-houge.jpg');">GH</div>
+        <div class="avatar">GH<img src="assets/images/team/greg-houge.jpg" alt="" onerror="this.remove()"></div>
         <h4>Greg Houge</h4>
         <div class="title">Co-Founder · Storage Etc.</div>
         <a href="https://www.linkedin.com/in/greg-houge-054026b" target="_blank" rel="noopener" style="font-size:11px; color: var(--gsc-navy-70); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--s-3);">LinkedIn ↗</a>
         <p>30+ years self-storage. Co-founded Storage Etc., LLC in 1999 and served as President through late 2023, after selling a <strong>$335M portfolio</strong> to a CBRE Investment Management-overseen private REIT. UCLA, Economics.</p>
       </div>
       <div class="team-card">
-        <div class="avatar" style="background-image: url('assets/images/team/doug-jensen.jpg');">DJ</div>
+        <div class="avatar">DJ<img src="assets/images/team/doug-jensen.jpg" alt="" onerror="this.remove()"></div>
         <h4>Doug Jensen</h4>
         <div class="title">Principal · Storage Etc.</div>
         <a href="https://www.linkedin.com/in/doug-jensen-61052417" target="_blank" rel="noopener" style="font-size:11px; color: var(--gsc-navy-70); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--s-3);">LinkedIn ↗</a>
         <p>President of Dano Companies, Partner of Douglas Allred Company, Principal of Storage Etc. <strong>40+ years CRE</strong> experience. Partnered with Greg since 1999. USC, Economics &amp; International Relations.</p>
       </div>
       <div class="team-card">
-        <div class="avatar" style="background-image: url('assets/images/team/david-thomas.jpg');">DT</div>
+        <div class="avatar">DT<img src="assets/images/team/david-thomas.jpg" alt="" onerror="this.remove()"></div>
         <h4>David Thomas</h4>
         <div class="title">Advisor · LBA Realty</div>
         <p>40+ years in investment sales, tenant negotiations, development, and asset management. Joined LBA Realty in 1993 as one of four original partners. UC Berkeley, Resource Economics.</p>
